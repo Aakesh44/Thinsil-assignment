@@ -5,7 +5,7 @@
   flex-direction: column;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
 }
 
@@ -15,7 +15,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: rgb(230, 75, 145)
-}
+} */
 
 .minicart::-webkit-scrollbar{
   width: 6px;
@@ -33,7 +33,32 @@
   }
 }
 
-.Card:hover{
+.searchdiv{
   transition-duration: 1000ms;
-  box-shadow: rgba(59, 63, 75, 0.27) 0px 0px 0.50em, rgba(90, 125, 188, 0.05) 0px 0.50em 20px;
+}
+.searchdiv:focus-within{
+  border-width: 1px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(59, 63, 75, 0.27) 0px 0px 5px
+}
+
+.Card:hover{
+  transition-duration: 700ms;
+  box-shadow: rgba(59, 63, 75, 0.27) 0px 0px 10px
+}
+
+.cardOption{
+  background-color: rgba(0, 0, 0, 0.234);
+}
+
+.cardIcons{
+  height: 40px;width: 40px;
+  border-radius: 100%;padding: 8px;
+  background-color: #4f4f4f9e;
+  color: whitesmoke;
+}
+
+.cardIcons:hover{
+  background-color: #2a2a2a;
+  color:rgb(234, 84, 151) ;
 }

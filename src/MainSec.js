@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import Banner from './Banner'
 import Card from './Card'
+import NewItems from './NewItems'
+import { Link } from 'react-router-dom'
+
 const MainSec = () => {
 
-  const categories = ['All', 'Kids' , 'Women', 'Men', 'Accessories']
+  const categories = ['All', 'Kids' , 'Women', 'Men', 'Footwear']
 
   const [curCategory,setcurCategory] = useState('All')
 
@@ -12,7 +15,7 @@ const MainSec = () => {
       
       <Banner/>
 
-      <section className='w-full'>
+      <section className='w-full flex flex-col'>
 
         <header className='w-full bg-green-3000'>
             <h1 className=' text-4xl font-semibold text-center'>Top Trending</h1>
@@ -26,7 +29,7 @@ const MainSec = () => {
             </div>
         </header>
 
-        <main className='w-full mb-72 p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000'>
+        <main className='w-full p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000'>
               <Card/> 
               <Card/>
               <Card/>
@@ -34,10 +37,12 @@ const MainSec = () => {
               <Card/>
               <Card/>
               <Card/>
-
-
         </main>
 
+        <Link to='/products' className='bg-pink-600 text-white text-sm font-semibold px-5 py-3 mb-5 rounded-md mx-auto active:scale-95'>View More</Link>
+          
+        <NewItems/>
+        
       </section>
     </main>
   )
