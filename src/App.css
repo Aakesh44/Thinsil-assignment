@@ -24,7 +24,8 @@
   background-color: rgb(236, 233, 233);
 }
 .minicart::-webkit-scrollbar-thumb{
-  background-color: rgb(89, 88, 88);
+  background-color: rgb(230, 97, 168);
+  /* background-color: rgb(89, 88, 88); */
 }
 
 .App{
@@ -48,17 +49,24 @@
 }
 
 .cardOption{
-  background-color: rgba(0, 0, 0, 0.234);
+  background-color: rgba(0, 0, 0, 0.338);
 }
 
 .cardIcons{
   height: 40px;width: 40px;
   border-radius: 100%;padding: 8px;
-  background-color: #4f4f4f9e;
+  background-color: #f0f0f081;
   color: whitesmoke;
 }
 
 .cardIcons:hover{
   background-color: #2a2a2a;
   color:rgb(234, 84, 151) ;
+}
+
+input[type=radio] {
+  accent-color: rgb(231, 76, 174);
+}
+input[type=checkbox] {
+  accent-color: rgb(231, 76, 174);
 }

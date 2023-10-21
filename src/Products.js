@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import {BsFillCaretDownFill} from 'react-icons/bs'
 import {BiSolidStar,BiPlus,BiMinus} from 'react-icons/bi'
 import {FaFilter} from 'react-icons/fa'
-
+import data from './data.json'
 import Card from './Card'
 const Products = () => {
-
+console.log(data);
   const filters = ['Category', 'Brand' , 'Price', 'Size', 'Rating']
 
   const categories = ['Kids','Women','Men','Footwear']
@@ -175,13 +175,17 @@ const Products = () => {
         
         {/* <section className='w-1/4'>s</section> */}
         <section className=' w-full lg:w-3/4 p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000'>
-              <Card size = {true}/> 
+
+          {data.map((product,i)=>(
+            <Card product={product} size={true} key={i}/>
+          ))}
+              {/* <Card size = {true}/> 
               <Card size = {true}/>
               <Card size = {true}/>
               <Card size = {true}/>
               <Card size = {true}/>
               <Card size = {true}/>
-              <Card size = {true}/>
+              <Card size = {true}/> */}
         </section>
     </main>
   )

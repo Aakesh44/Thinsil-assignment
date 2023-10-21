@@ -1,10 +1,12 @@
 import React from 'react'
-import {BiSolidTrash} from 'react-icons/bi'
+import {BiSolidTrash,BiCartAlt} from 'react-icons/bi'
 import { Link } from 'react-router-dom'
-
+import data from './data.json'
 const Wishlist = () => {
     
   const img = "https://s3.eu-central-1.wasabisys.com/zemuria/plipplip.store/products/pVN0EAgZphn8IMApPlOmXNvpDzFZreVAZ2ppScLI.webp"
+
+  const likedProducts = data.filter(n=>n.like)
 
   return (
     <main className='w-full mt-10 mb-40 p-3 sm:px-10 lg:px-20 xl:px-32 '>
@@ -16,30 +18,29 @@ const Wishlist = () => {
 
       <div className='w-full'>
 
+      {likedProducts?.map((product,ind)=>(
 
-        <section className='w-full h-28 my-5 border-2 rounded-sm flex items-center justify-around p-3 md:px-10 py-2'>
+        <section key={ind} className='w-full h-28 my-5 border-2 rounded-sm flex items-center justify-around px-1 sm:p-3 md:px-10 sm:py-2'>
 
-          <Link to='/products/1' className='h-full aspect-square border bg-cover bg-center bg-no-repeat' style={{backgroundImage:`url(${img})`}}></Link>
+          <Link to={`/products/${product.id}`} className=' h-5/6 sm:h-full mr-2 sm:mr-5 aspect-square border bg-cover bg-center bg-no-repeat bg-red-300' style={{backgroundImage:`url(${product?.img || ""})`}}></Link>
 
-
-          <div className='flex items-center justify-around md:px-10 w-full bg-amber-2000'>
-
-            <div className='h-full w-fit md:mr-auto flex flex-col items-center justify-center gap-1 md:gap-3 bg-green-3000 '>
-              <Link to="/products/1" className='text-base font-semibold'>Title Title</Link>
-              <p className='text-lg font-bold'>₹2302</p>
-            </div>
-
-            <button className=' px-2 md:px-4 py-2 my-5  md:mx-auto text-xs md:text-base bg-pink-600 text-white whitespace-nowrap rounded-md active:scale-95'>Add To Cart</button>
-            
+          <div className='h-full w-2/5 md:mr-auto flex flex-col items-start justify-center gap-1 md:gap-3 bg-green-0 '>
+            <Link to="/products/1" className='text-sm sm:text-base font-semibold'>{product.title || ""}</Link>
+            <p className='text-lg font-bold'>₹{product.price || 0}</p>
           </div>
-
-          <span className=' bg-pink-100 p-2 md:p-4 h-fit ml-auto my-auto rounded'>
-            <BiSolidTrash className='h-5 w-5 cursor-pointer text-pink-600'/>
+           
+          <span className=' bg-pink-200 p-2 md:p-4 h-fit ml-auto my-auto rounded active:scale-95 transition cursor-pointer'>
+            <BiCartAlt className=' h-5 lg:h-6 w-5 lg:w-6 cursor-pointer text-pink-600'/>
+          </span> 
+          <span className=' bg-pink-200 p-2 md:p-4 h-fit ml-auto my-auto rounded active:scale-95 transition cursor-pointer'>
+            <BiSolidTrash className=' h-5 lg:h-6 w-5 lg:w-6 cursor-pointer text-pink-600'/>
           </span>
 
         </section>
 
-                    
+              
+      ))}
+
       </div>
 
     </main>

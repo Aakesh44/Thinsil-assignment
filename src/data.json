@@ -1,0 +1,178 @@
+[
+    {
+		"id": 1,
+		"title": "Full Sleeves Tee",
+		"description": "18 to 24 Months, Navy Blue round neck tee",
+		"price": 400,
+		"img": "https://cdn.fcglcdn.com/brainbees/images/products/438x531/8615268a.webp",
+		"category": "kids",
+		"inCart": true,
+        "like":false,
+		"rating": 5
+	},
+	{
+		"id": 2,
+		"title": "Full Sleeves Blue Night Suit",
+		"description": "18 to 24 Months, A round neck top with soft elastic track pant",
+		"price": 549,
+		"img": "https://cdn.fcglcdn.com/brainbees/images/products/438x531/9554531a.webp",
+		"category": "kids",
+		"inCart": false,
+        "like":true,
+		"rating": 4
+	},
+	{
+		"id": 3,
+		"title": " Floral Print Frock",
+		"description": "12 to 18 Months, round neck pullover with three fourth sleeves frock with front buttons closure for girls",
+		"price": 599,
+		"img": "https://cdn.fcglcdn.com/brainbees/images/products/438x531/9351128a.webp",
+		"category": "kids",
+		"inCart": false,
+        "like":false,
+		"rating": 5
+	},
+	{
+		"id": 4,
+		"title": " Zig Zag Print Palazzo - Multi Color",
+		"description": "5 to 6 Years, Breezy and light bottoms for your baby's comfort with zig-zag print and knot belt",
+		"price": 469,
+		"img": "https://cdn.fcglcdn.com/brainbees/images/products/438x531/8043777a.webp",
+		"category": "kids",
+		"inCart": false,
+        "like":false,
+		"rating": 5
+	},
+    {
+		"id": 5,
+		"title": "Women Red Frock",
+		"description": "Women's red casual floral frock 💃",
+		"price": 2299,
+		"img": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1884&q=80",
+		"category": "women",
+		"inCart": false,
+        "like":true,
+		"rating": 4
+	},
+	{
+		"id": 6,
+		"title": "Women White Shorts",
+		"description": "Women's white casual shorts",
+		"price": 1439,
+		"img": "https://images.unsplash.com/photo-1475180098004-ca77a66827be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1866&q=80",
+		"category": "women",
+		"inCart": false,
+        "like":false,
+		"rating": 3
+	},
+	{
+		"id": 7,
+		"title": "Women Grey Jumpsuit",
+		"description": "Women's grey casual ",
+		"price": 1989,
+		"img": "https://images.unsplash.com/photo-1545291730-faff8ca1d4b0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+		"category": "women",
+		"inCart": true,
+        "like":false,
+		"rating": 2
+	},
+	{
+		"id": 8,
+		"title": "Women Orange Jacket",
+		"description": "Women's orange casual ",
+		"price": 2499,
+		"img": "https://images.unsplash.com/photo-1540827109409-17f40944f276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+		"category": "women",
+		"inCart": false,
+        "like":false,
+		"rating": 4
+	},
+    {
+		"id": 9,
+		"title": "Men Blue Regular Fit Shirt",
+		"description": "Blue faded casual shirt",
+		"price": 890,
+		"img": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/1353004/2018/9/18/a8acac3a-077a-400f-a1c7-519215a5265e1537251707732-Roadster-Men-Blue-Denim-Washed-Casual-Shirt-5281537251705552-1.jpg",
+		"category": "men",
+		"inCart": false,
+        "like":true,
+		"rating": 3
+	},
+	{
+		"id": 10,
+		"title": "Color Block Men T-Shirt",
+		"description": "Color Block Men Hooded Neck Yellow T-Shirt",
+		"price": 1119,
+		"img": "https://rukminim1.flixcart.com/image/880/1056/k5cs87k0/t-shirt/s/u/x/l-jc20-hood-fs-yellow-irregular-jump-cuts-original-imafzfbyhtmyq9nf.jpeg?q=50",
+		"category": "men",
+		"inCart": true,
+        "like":false,
+		"rating": 5
+	},
+	{
+		"id": 11,
+		"title": "Men Black & White Casual Shirt",
+		"description": "Black and White printed casual shirt",
+		"price": 1049,
+		"img": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/11780944/2020/4/3/1ee22980-624d-4822-8a7b-1934c2ade5ba1585905005496HIGHLANDERMenBlackWhiteSlimFitPrintedCasualShirt1.jpg",
+		"category": "men",
+		"inCart": false,
+        "like":false,
+		"rating": 4
+	},
+	{
+		"id": 12,
+		"title": "Men Blue Solid Suit",
+		"description": "Blue solid suit. Blue solid blazer 🕺",
+		"price": 5499,
+		"img": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2018/12/5/dab48fea-4158-4b4d-8fe4-ba4688de850d1543955384584-1.jpg",
+		"category": "men",
+		"inCart": true,
+        "like":false,
+		"rating": 2
+	},
+    {
+		"id": 13,
+		"title": "Women Blue and Pink Floral Almond Toe Pumps",
+		"description": "Blue and Pink Floral 3 inch pencil heel with almond toes ",
+		"price": 1390,
+		"img": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+		"category": "footwear",
+		"inCart": false,
+        "like":false,
+		"rating": 5
+	},
+	{
+		"id": 14,
+		"title": "Women Leather Sandals",
+		"description": "Leather Ankle-strap Sandals ",
+		"price": 999,
+		"img": "https://images.unsplash.com/photo-1534653299134-96a171b61581?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=582&q=80",
+		"category": "footwear",
+		"inCart": false,
+        "like":true,
+		"rating": 4
+	},
+	{
+		"id": 15,
+		"title": "Men Black & White Sneakers",
+		"description": "A pair of round-toe black & white sneakers 👟",
+		"price": 1599,
+		"img": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/12849746/2020/11/4/4e7604df-3578-4e5d-aeba-6a5befe9a9171604491200530RedTapeMenBlackWhiteColourblockedSyntheticMid-TopSneakers1.jpg",
+		"category": "footwear",
+		"inCart": true,
+        "like":false,
+		"rating": 3
+	},
+	{
+		"id": 16,
+		"title": "Women Beige Block Heeled Boots",
+		"description": "A pair of beige heeled boots ,has regular ankle and lace-ups.",
+		"price": 890,
+		"img": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/14830508/2021/7/24/59e0a7c3-5995-43d9-b019-36cebd4accd41627096930620-LONDON-STEPS-Women-Beige-Block-Heeled-Boots-8681627096930564-13.jpg",
+		"category": "footwear",
+		"inCart": false,
+        "like":false,
+		"rating": 4
+	}
+]

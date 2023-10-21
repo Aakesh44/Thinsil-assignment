@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import logo from './images/logo8.png'
+import logo from './images/logo14.png'
 import {BiSearch,BiHeart,BiSolidCartAlt,BiSolidLockOpenAlt} from 'react-icons/bi'
 import {MdOutlineAccountBox,MdPersonAddAlt1,MdClose} from 'react-icons/md'
 import {FiMenu} from 'react-icons/fi'
@@ -26,7 +26,7 @@ const Header = () => {
     <main className='sticky z-30 top-0 bg-white shadow-sm w-full h-20 md:h-24 border border-b-gray-100 flex items-center justify-between lg:px-16 xl:px-28 bg-greesn-300'>
       
 
-      <Link to='/' style={{backgroundImage:`url(${logo})`}} className='h-full aspect-video bg-blend-multiply bg-contain bg-center bg-no-repeat '></Link>
+      <Link to='/' style={{backgroundImage:`url(${logo})`}} className='h-full aspect-video bg-blend-screen bg-contain bg-center bg-no-repeat '></Link>
       
       <section className='searchdiv w-52 sm:w-64 md:w-72 lg:w-96 h-10 p-1 flex justify-center items-center rounded-full overflow-hidden transition-all bg-gray-100 border-pink-2000 '>
 
@@ -54,8 +54,8 @@ const Header = () => {
           {profilePopup &&
 
           <div className=' absolute top-full right-0 lg:left-0 z-10 w-32 xl:w-40 h-28 px-2 flex flex-col items-center justify-center rounded bg-white text-black drop-shadow-md cursor-default' data-aos="fade-up"  data-aos-duration="500">
-              <Link to='/signup' className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <MdPersonAddAlt1    className='h-4 w-4'/> <h1>Signup</h1> </Link>
-              <Link to='/login' className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <BiSolidLockOpenAlt className='h-4 w-4'/> <h1>Login</h1> </Link>
+              <Link to='/signup' className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <MdPersonAddAlt1    className='h-4 w-4 text-pink-500'/> <h1>Signup</h1> </Link>
+              <Link to='/login' className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <BiSolidLockOpenAlt  className='h-4 w-4 text-pink-500'/> <h1>Login</h1> </Link>
           </div>
 
           }

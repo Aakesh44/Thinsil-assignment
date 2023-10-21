@@ -1,8 +1,16 @@
 import React, { useState } from 'react'
 import NewItems from './NewItems'
 import {BiSolidShareAlt,BiSolidHeart,BiSolidCartAlt,BiCartAlt,BiHeart,BiPlus,BiMinus,BiLogoFacebook,BiLogoTwitter,BiLogoInstagram,BiLogoWhatsapp,BiLogoPinterestAlt} from 'react-icons/bi'
-
+import { Link, useParams } from 'react-router-dom'
+import data from './data.json'
 const SelectedProduct = () => {
+
+  const ID = useParams().id
+  
+  const product = data.find((n)=> n.id == ID) 
+  console.log(ID);
+  console.log(product);
+
   const Sizes = ['S' , 'M', 'L', 'XL','XXL']
 
   const [count,setCount] = useState(1)
@@ -18,16 +26,17 @@ const SelectedProduct = () => {
       <section className='w-full md:flex '>
 
         <aside className=' w-2/3 mx-auto md:w-2/5 p-2 lg:p-10 bg-cyan-2000 select-none'>
-          <img src={img} alt="" className=' shadow-sm border' style={{aspectRatio:'3/4'}}/>
+          <img src={product?.img || ""} alt="" className=' shadow-sm border' style={{aspectRatio:'3/4'}}/>
         </aside>
 
         <aside className='w-full md:w-3/5 p-10 flex flex-col bg-amber-2000'>
 
           <header className='w-full flex bg-red-2000'>
             <div className='py-4'>
-              <h1 className='text-2xl font-bold my-1'>Karuthu Sorugal Hoodie</h1>
-              <p className='text-sm text-gray-600'>Karuthu Penetration 💥😌</p>
+              <h1 className='text-2xl font-bold my-1'>{product?.title || ""}</h1>
+              <p className='text-sm text-gray-600'>{product?.description || ""} 💥😌</p>
             </div>
+
             <div onClick={()=>setSharePopup(prev=>!prev)}  className='relative flex items-center justify-center gap-1 text-sm font-semibold ml-auto cursor-pointer'>
               <BiSolidShareAlt className='h-5 w-5'/>
               <p>Share</p>
@@ -42,19 +51,21 @@ const SelectedProduct = () => {
                 <BiLogoPinterestAlt className=' h-4 w-4 md:h-5 md:w-5 lg:h-6 lg:w-6 cursor-pointer hover:text-red-700'/>
 
               </span>}
+
             </div>
+
           </header>
 
-          <h1 className=' text-3xl font-bold text-pink-600 py-5'>₹23233.00</h1>
+          <h1 className=' text-3xl font-bold text-pink-600 py-5'>₹{product?.price || ""}.00</h1>
 
           <div className='w-full flex py-5'>
 
             <div onClick={()=>setHeartAction(prev=>!prev)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
-              {heartAction ? <BiSolidHeart className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiHeart className='h-6 w-6 active:scale-150 text-black transition'/>} 
+              {product?.like ? <BiSolidHeart className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiHeart className='h-6 w-6 active:scale-150 text-black transition'/>} 
               <p>Add to wishlist</p>
             </div>
             <div onClick={()=>setCartAction(prev=>!prev)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
-              {cartAction ? <BiSolidCartAlt className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiCartAlt className='h-6 w-6 active:scale-150 text-black transition'/>} 
+              {product?.inCart ? <BiSolidCartAlt className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiCartAlt className='h-6 w-6 active:scale-150 text-black transition'/>} 
               <p>Add to cart</p>
             </div>
 
@@ -65,22 +76,22 @@ const SelectedProduct = () => {
           <div className='w-full py-5 flex flex-wrap justify-between'>
             
             {Sizes.map((size,ind)=>(
-            <div className='w-fit flex items-center gap-1 text-sm font-semibold bg-red-4000'>
-              <input type="radio" key={ind} name="size" id={size} className='h-5 w-5'/> <label htmlFor={size}>{size}</label>
+            <div className='w-fit flex items-center gap-1 text-sm font-semibold bg-red-4000' key={ind}>
+              <input type="radio"  name="size" id={size} defaultChecked={size === 'S'} className='h-5 w-5'/> <label htmlFor={size}>{size}</label>
             </div>))}
           </div>
           
           <p style={{height:'1px'}} className='my-4 bg-pink-500'></p>
 
-          <div className='w-fit py-5 mx-auto md:mx-0 flex b'>
+          <div className='w-fit p rounded-md mx-auto md:mx-0 flex bg-gray-100'>
 
-              <button onClick={()=> count > 1 && setCount(prev => prev-1)} className='h-10 w-10 flex items-center justify-center rounded-full m-1 bg-pink-400 '><BiMinus className='h-5 w-5'/></button>
-              <input value={count} readOnly className='h-10 w-14 text-center rounded m-1 bg-pink-400 outline-none'/>
-              <button onClick={()=>setCount(prev=> prev+1)} className='h-10 w-10 flex items-center justify-center rounded-full m-1 bg-pink-400 '><BiPlus className='h-5 w-5'/></button>
+              <button onClick={()=> count > 1 && setCount(prev => prev-1)} className='h-10 w-10 flex items-center justify-center rounded-full m-1 bg-gray-200 '><BiMinus className='h-5 w-5'/></button>
+              <input value={count} readOnly className='h-10 w-14 text-center rounded m-1 bg-white outline-none'/>
+              <button onClick={()=>setCount(prev=> prev+1)} className='h-10 w-10 flex items-center justify-center rounded-full m-1 bg-gray-200 '><BiPlus className='h-5 w-5'/></button>
 
           </div>
 
-          <button className=' w-3/5 md:w-fit md:px-6 py-2 my-5 mx-auto md:mx-0 font-semibold text-lg bg-pink-600 text-white rounded-md active:scale-95'>Buy Now</button>
+          <Link to="/checkout" className=' w-3/5 md:w-fit md:px-6 py-2 my-5 mx-auto md:mx-0 flex items-center justify-center font-semibold text-lg bg-pink-600 text-white rounded-md active:scale-95'>Buy Now</Link>
 
         </aside>
       </section>

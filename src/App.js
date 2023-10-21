@@ -9,7 +9,7 @@ import Login from './LogIn'
 import Wishlist from './Wishlist'
 import Cart from './Cart'
 import SelectedProduct from './SelectedProduct'
-
+import Final from './Final'
 import { Routes,Route } from 'react-router-dom';
 import Aos from 'aos';
 
@@ -43,6 +43,7 @@ function App() {
 
           <Route path='/cart' element ={ <Cart/> }/>
 
+          <Route path='/checkout' element={ <Final/>} />
 
         </Routes>
       </section>
