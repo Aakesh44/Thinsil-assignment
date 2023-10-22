@@ -10,10 +10,19 @@ import Wishlist from './Wishlist'
 import Cart from './Cart'
 import SelectedProduct from './SelectedProduct'
 import Final from './Final'
-import { Routes,Route } from 'react-router-dom';
+import { Routes,Route,useLocation } from 'react-router-dom';
 import Aos from 'aos';
+import Notfound from './Notfound';
 
 function App() {
+
+  const location = useLocation()
+
+  useEffect(()=>{
+    
+    window.scrollTo(0,0)
+
+  },[location.pathname])
 
   useEffect(() => {
     Aos.init({
@@ -21,8 +30,9 @@ function App() {
     });
   }, []);
 
+
   return (
-    <main className="App relative pb-96">
+    <main className="App relative">
       
       <Header/>
 
@@ -44,6 +54,8 @@ function App() {
           <Route path='/cart' element ={ <Cart/> }/>
 
           <Route path='/checkout' element={ <Final/>} />
+
+          <Route path='*' element={<Notfound/>} />
 
         </Routes>
       </section>

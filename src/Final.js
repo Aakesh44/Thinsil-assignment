@@ -8,7 +8,7 @@ const Final = () => {
   const totalPrice = cartProducts.reduce((acc,a)=>{return acc + a.price},0)
 
   return (
-    <main className='w-full mt-10 mb-40 p-3 sm:px-10 lg:px-10 xl:px-32 lg:flex'>
+    <main className='w-full my-10 p-3 sm:px-10 lg:px-10 xl:px-32 lg:flex'>
 
         <aside className=' w-full lg:w-1/2 xl:px-5'>
 
@@ -116,7 +116,7 @@ const Final = () => {
                     <p>₹{totalPrice - 100 || 0}</p>
                 </div>
 
-                <button to="/checkout" className=' bg-pink-700 text-gray-50 h-12 w-5/6 mx-auto my-5 rounded-md text-xs font-bold active:scale-95 transition flex items-center justify-center'>Place Order</button>
+                <Link to="/" className=' bg-pink-700 text-gray-50 h-12 w-5/6 mx-auto my-5 rounded-md text-xs font-bold active:scale-95 transition flex items-center justify-center'>Place Order</Link>
 
 
                 </section>                

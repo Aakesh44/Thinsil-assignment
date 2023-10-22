@@ -7,9 +7,7 @@ const SelectedProduct = () => {
 
   const ID = useParams().id
   
-  const product = data.find((n)=> n.id == ID) 
-  console.log(ID);
-  console.log(product);
+  const product = data.find((n)=> n.id === parseInt(ID)) 
 
   const Sizes = ['S' , 'M', 'L', 'XL','XXL']
 
@@ -20,7 +18,6 @@ const SelectedProduct = () => {
 
   const [sharePopup,setSharePopup] = useState(false)
 
-  const img = "https://s3.eu-central-1.wasabisys.com/zemuria/plipplip.store/products/pVN0EAgZphn8IMApPlOmXNvpDzFZreVAZ2ppScLI.webp"
   return (
     <main className='w-full mt-10 lg:px-20 xl:px-32'>
       <section className='w-full md:flex '>
@@ -58,14 +55,14 @@ const SelectedProduct = () => {
 
           <h1 className=' text-3xl font-bold text-pink-600 py-5'>₹{product?.price || ""}.00</h1>
 
-          <div className='w-full flex py-5'>
+          <div className='w-full flex py-5 select-none'>
 
             <div onClick={()=>setHeartAction(prev=>!prev)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
-              {product?.like ? <BiSolidHeart className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiHeart className='h-6 w-6 active:scale-150 text-black transition'/>} 
+              {heartAction ? <BiSolidHeart className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiHeart className='h-6 w-6 active:scale-150 text-black transition'/>} 
               <p>Add to wishlist</p>
             </div>
             <div onClick={()=>setCartAction(prev=>!prev)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
-              {product?.inCart ? <BiSolidCartAlt className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiCartAlt className='h-6 w-6 active:scale-150 text-black transition'/>} 
+              {cartAction ? <BiSolidCartAlt className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiCartAlt className='h-6 w-6 active:scale-150 text-black transition'/>} 
               <p>Add to cart</p>
             </div>
 

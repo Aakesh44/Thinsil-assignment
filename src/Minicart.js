@@ -24,7 +24,7 @@ const Minicart = ({setCartOpen}) => {
                     <p className=' text-xs font-semibold text-start'>1 x ₹{product.price || ""}</p>
                 </Link>
    
-                 <span className=' bg-pink-100 p-2 rounded'>
+                 <span className=' bg-pink-100 p-2 rounded active:scale-95 transition cursor-pointer'>
                     <BiSolidTrash className='h-5 w-5 cursor-pointer text-pink-600'/>
                 </span>
 
