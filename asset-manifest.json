@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Thinsil-assignment/static/css/main.87c52c4c.css",
-    "main.js": "/Thinsil-assignment/static/js/main.328fec93.js",
+    "main.js": "/Thinsil-assignment/static/js/main.40365fa9.js",
     "static/js/787.0c4634ad.chunk.js": "/Thinsil-assignment/static/js/787.0c4634ad.chunk.js",
     "static/media/error.jpg": "/Thinsil-assignment/static/media/error.4982f07898495a686c8c.jpg",
     "static/media/logo14.png": "/Thinsil-assignment/static/media/logo14.4c9544d95989f15928bd.png",
     "index.html": "/Thinsil-assignment/index.html",
     "main.87c52c4c.css.map": "/Thinsil-assignment/static/css/main.87c52c4c.css.map",
-    "main.328fec93.js.map": "/Thinsil-assignment/static/js/main.328fec93.js.map",
+    "main.40365fa9.js.map": "/Thinsil-assignment/static/js/main.40365fa9.js.map",
     "787.0c4634ad.chunk.js.map": "/Thinsil-assignment/static/js/787.0c4634ad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.87c52c4c.css",
-    "static/js/main.328fec93.js"
+    "static/js/main.40365fa9.js"
   ]
 }
