@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 const SignUp = () => {
   return (
+
+    // signup form 
+    
     <form className=' w-4/5 sm:w-2/3 lg:w-1/3 mx-auto p-5 mt-10 mb-20 text-xs font-semibold flex flex-col justify-around border rounded-sm bg-cyan-2000'>
 
       <header className='w-full my-5 mb-10 text-2xl font-bold text-center '>

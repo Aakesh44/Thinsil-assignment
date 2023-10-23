@@ -95,7 +95,7 @@
 		"img": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/1353004/2018/9/18/a8acac3a-077a-400f-a1c7-519215a5265e1537251707732-Roadster-Men-Blue-Denim-Washed-Casual-Shirt-5281537251705552-1.jpg",
 		"category": "men",
 		"inCart": false,
-        "like":true,
+        "like":false,
 		"rating": 3
 	},
 	{
@@ -105,7 +105,7 @@
 		"price": 1119,
 		"img": "https://rukminim1.flixcart.com/image/880/1056/k5cs87k0/t-shirt/s/u/x/l-jc20-hood-fs-yellow-irregular-jump-cuts-original-imafzfbyhtmyq9nf.jpeg?q=50",
 		"category": "men",
-		"inCart": true,
+		"inCart": false,
         "like":false,
 		"rating": 5
 	},
@@ -150,7 +150,7 @@
 		"img": "https://images.unsplash.com/photo-1534653299134-96a171b61581?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=582&q=80",
 		"category": "footwear",
 		"inCart": false,
-        "like":true,
+        "like":false,
 		"rating": 4
 	},
 	{

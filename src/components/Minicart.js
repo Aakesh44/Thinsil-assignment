@@ -1,15 +1,20 @@
 import React from 'react'
+import { useContext } from 'react'
 import {BiSolidTrash} from 'react-icons/bi'
 import { Link } from 'react-router-dom'
-import data from './data.json'
+import DataContext from '../context/dataContext'
+
 const Minicart = ({setCartOpen}) => {
 
-  const cartProducts = data.filter(n=>n.inCart)
+  const {cartProducts,handleCart} = useContext(DataContext)
+  const totalPrice = cartProducts.reduce((acc,a)=>{return acc + a.price},0)
 
   return (
     <section className='absolute p-10 z-20 top-full right-0  bg-white text-black rounded-sm drop-shadow-md cursor-default  select-none' data-aos="fade-up" data-aos-duration="500">
 
         <aside className='minicart w-96 px-2 max-h-56 flex flex-col overflow-y-scroll'>
+
+        {/* minicart: map over cartproducts array to render each product */}
 
         {cartProducts?.map((product,ind)=>(
 
@@ -24,7 +29,7 @@ const Minicart = ({setCartOpen}) => {
                     <p className=' text-xs font-semibold text-start'>1 x ₹{product.price || ""}</p>
                 </Link>
    
-                 <span className=' bg-pink-100 p-2 rounded active:scale-95 transition cursor-pointer'>
+                 <span onClick={()=>handleCart(product)} className=' bg-pink-100 p-2 rounded active:scale-95 transition cursor-pointer'>
                     <BiSolidTrash className='h-5 w-5 cursor-pointer text-pink-600'/>
                 </span>
 
@@ -33,12 +38,14 @@ const Minicart = ({setCartOpen}) => {
         ))}
 
         </aside>
-
+        
+        {/* minicart: price and link section */}
+        
         <aside className='w-96 h-52 grid grid-rows-3'>
 
             <div className='w-full text-base font-semibold flex items-center justify-around'>
               <h1>Total</h1>
-              <h1>₹2322</h1>
+              <h1>₹{totalPrice}</h1>
             </div>
 
             <Link to="/checkout" onClick={()=>setCartOpen(false)} className=' bg-pink-600 text-white h-10 w-5/6 mx-auto my-auto flex items-center justify-center rounded-md text-xs font-bold active:scale-95'>PROCEED TO CHECKOUT</Link>

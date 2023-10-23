@@ -1,30 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect,useContext} from 'react'
 import NewItems from './NewItems'
 import {BiSolidShareAlt,BiSolidHeart,BiSolidCartAlt,BiCartAlt,BiHeart,BiPlus,BiMinus,BiLogoFacebook,BiLogoTwitter,BiLogoInstagram,BiLogoWhatsapp,BiLogoPinterestAlt} from 'react-icons/bi'
 import { Link, useParams } from 'react-router-dom'
-import data from './data.json'
+import DataContext from '../context/dataContext'
 const SelectedProduct = () => {
+
+  const {handleLike,cartProducts,likeProducts,handleCart,allProducts} = useContext(DataContext)
 
   const ID = useParams().id
   
-  const product = data.find((n)=> n.id === parseInt(ID)) 
+  let product = allProducts.find((n)=> n.id === parseInt(ID)) 
 
   const Sizes = ['S' , 'M', 'L', 'XL','XXL']
 
   const [count,setCount] = useState(1)
 
-  const [heartAction,setHeartAction] = useState(false)
-  const [cartAction,setCartAction] = useState(false)
+  const [heartAction,setHeartAction] = useState(likeProducts.some(n=>n.id === product.id))
+  const [cartAction,setCartAction] = useState(cartProducts.some(n=>n.id === product.id))
 
   const [sharePopup,setSharePopup] = useState(false)
+
+ useEffect(()=>{
+    product = allProducts.find((n)=> n.id === parseInt(ID)) 
+    setHeartAction(likeProducts.some(n=>n.id === product.id))
+    setCartAction(cartProducts.some(n=>n.id === product.id))
+ },[cartProducts,likeProducts])
 
   return (
     <main className='w-full mt-10 lg:px-20 xl:px-32'>
       <section className='w-full md:flex '>
+      
+      {/* product: img */}
 
         <aside className=' w-2/3 mx-auto md:w-2/5 p-2 lg:p-10 bg-cyan-2000 select-none'>
           <img src={product?.img || ""} alt="" className=' shadow-sm border' style={{aspectRatio:'3/4'}}/>
         </aside>
+
+      {/* product: details  */}
 
         <aside className='w-full md:w-3/5 p-10 flex flex-col bg-amber-2000'>
 
@@ -57,11 +69,11 @@ const SelectedProduct = () => {
 
           <div className='w-full flex py-5 select-none'>
 
-            <div onClick={()=>setHeartAction(prev=>!prev)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
+            <div onClick={()=>handleLike(product)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
               {heartAction ? <BiSolidHeart className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiHeart className='h-6 w-6 active:scale-150 text-black transition'/>} 
               <p>Add to wishlist</p>
             </div>
-            <div onClick={()=>setCartAction(prev=>!prev)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
+            <div onClick={()=>handleCart(product)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
               {cartAction ? <BiSolidCartAlt className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiCartAlt className='h-6 w-6 active:scale-150 text-black transition'/>} 
               <p>Add to cart</p>
             </div>
@@ -92,7 +104,8 @@ const SelectedProduct = () => {
 
         </aside>
       </section>
-
+    
+    {/* product: render newitem components */}
       <NewItems/>
     </main>
   )

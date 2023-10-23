@@ -1,16 +1,17 @@
 import React from 'react'
-import {BiSolidTrash,BiCartAlt} from 'react-icons/bi'
+import {BiSolidTrash,BiCartAlt,BiSolidCartAlt} from 'react-icons/bi'
 import { Link } from 'react-router-dom'
-import data from './data.json'
+import { useContext } from 'react'
+import DataContext from '../context/dataContext'
 const Wishlist = () => {
-    
-  const img = "https://s3.eu-central-1.wasabisys.com/zemuria/plipplip.store/products/pVN0EAgZphn8IMApPlOmXNvpDzFZreVAZ2ppScLI.webp"
 
-  const likedProducts = data.filter(n=>n.like)
+  const {likeProducts,handleLike,handleCart} = useContext(DataContext)
+  // console.log(likeProducts);
 
   return (
     <main className='w-full mt-10 mb-40 p-3 sm:px-10 lg:px-20 xl:px-32 '>
 
+      {/* wishlist: header section  */}
       <header className='w-full my-5 md:my-10 md:mb-20 text-2xl font-bold text-center '>
         <h1>WISHLIST</h1>
       </header>
@@ -18,7 +19,9 @@ const Wishlist = () => {
 
       <div className='w-full'>
 
-      {likedProducts?.map((product,ind)=>(
+      {/* wishlist: map over likeproducts array to render each product */}
+
+      {likeProducts?.map((product,ind)=>(
 
         <section key={ind} className='w-full h-28 my-5 border-2 rounded-sm flex items-center justify-around px-1 sm:p-3 md:px-10 sm:py-2'>
 
@@ -29,10 +32,11 @@ const Wishlist = () => {
             <p className='text-lg font-bold'>₹{product.price || 0}</p>
           </div>
            
-          <span className=' bg-pink-200 p-2 md:p-4 h-fit ml-auto my-auto rounded active:scale-95 transition cursor-pointer'>
-            <BiCartAlt className=' h-5 lg:h-6 w-5 lg:w-6 cursor-pointer text-pink-600'/>
+          <span onClick={()=>handleCart(product)} className=' bg-pink-200 p-2 md:p-4 h-fit ml-auto my-auto rounded active:scale-95 transition cursor-pointer'>
+            {product.inCart ? <BiSolidCartAlt className=' h-5 lg:h-6 w-5 lg:w-6 cursor-pointer text-pink-600'/> :<BiCartAlt className=' h-5 lg:h-6 w-5 lg:w-6 cursor-pointer text-pink-600'/>}
           </span> 
-          <span className=' bg-pink-200 p-2 md:p-4 h-fit ml-auto my-auto rounded active:scale-95 transition cursor-pointer'>
+
+          <span onClick={()=>handleLike(product)} className=' bg-pink-200 p-2 md:p-4 h-fit ml-auto my-auto rounded active:scale-95 transition cursor-pointer'>
             <BiSolidTrash className=' h-5 lg:h-6 w-5 lg:w-6 cursor-pointer text-pink-600'/>
           </span>
 

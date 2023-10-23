@@ -2,17 +2,20 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {FaLongArrowAltLeft} from 'react-icons/fa'
 import {BiSolidTrash} from 'react-icons/bi'
-import data from './data.json'
+import data from '../data/data.json'
+import { useContext } from 'react'
+import DataContext from '../context/dataContext'
+
 const Cart = () => {
 
-  const cartProducts = data.filter(n=>n.inCart)
+  const {cartProducts,handleCart} = useContext(DataContext)
   const totalPrice = cartProducts.reduce((acc,a)=>{return acc + a.price},0)
-  const img = "https://s3.eu-central-1.wasabisys.com/zemuria/plipplip.store/products/pVN0EAgZphn8IMApPlOmXNvpDzFZreVAZ2ppScLI.webp"
 
   return (
     
     <main className='w-full mt-10 mb-40 p-3 sm:px-10 lg:px-10 xl:px-32 '>
 
+      {/* cart: header section */}
       <header className='w-full flex items-center justify-between px-5 my-5 md:my-10 md:mb-20 text-lg sm:text-2xl font-bold text-center bg-amber-3000'>
         <h1>SHOPPING CART</h1>
         <Link to="/products" className='text-xs sm:text-base text-pink-600 flex items-center gap-2'>
@@ -26,6 +29,8 @@ const Cart = () => {
 
         <aside className=' w-full lg:w-2/3 xl:px-5'>
 
+        {/* cart: map over cartproducts array to render each product */}
+
         {cartProducts?.map((product,ind)=>(
           <div className='w-full h-28 my-4 border rounded-sm flex items-center justify-around px-2 md:px-7 sm:py-2 bg-cyan-2000 ' key={ind}>
 
@@ -33,7 +38,7 @@ const Cart = () => {
 
             <section className='flex flex-wrap  h-full sm:flex-row w-full items-center justify-around'>
 
-              <Link to={`/products/${product.id || ""}`}  className='h-1/2 w-full bg-cyan-2000 sm:h-full sm:w-1/2 md:mrr-auto flex flex-col items-centser justify-center gap-1 md:gap-3 bg-green-3000 '>
+              <Link to={`/products/${product.id || ""}`}  className='h-1/2 w-full bg-cyan-2000 sm:h-full sm:w-1/2 flex flex-col items-centser justify-center gap-1 md:gap-3 bg-green-3000 '>
                 <h1  className='text-sm font-semibold whitespace-nowrap truncate'>{product.title || ""}</h1>
                 <p className='text-sm sm:text-lg font-bold'>₹{product.price || 0}</p>
               </Link>
@@ -50,7 +55,7 @@ const Cart = () => {
 
             </section>
 
-            <span className=' bg-pink-100 p-2 md:p-2 h-fit ml-auto my-auto rounded active:scale-95 transition'>
+            <span onClick={()=>handleCart(product)} className=' bg-pink-100 p-2 md:p-2 h-fit ml-auto my-auto rounded active:scale-95 transition'>
               <BiSolidTrash className='h-5 w-5 cursor-pointer text-pink-600'/>
             </span>
           </div>
@@ -71,6 +76,8 @@ const Cart = () => {
 
             </section>
 
+            {/* cart: price details section */}
+            
             <section className='w-full flex flex-col items-center p-5 border rounded-sm my-4'>
               
               <div className='w-5/6 h-12 flex justify-between items-center text-sm font-semibold'>

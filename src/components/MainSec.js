@@ -3,24 +3,33 @@ import Banner from './Banner'
 import Card from './Card'
 import NewItems from './NewItems'
 import { Link } from 'react-router-dom'
-import data from './data.json'
+// import data from '../data/data.json'
+import { useContext } from 'react'
+import DataContext from '../context/dataContext'
 
 const MainSec = () => {
+
+  const {allProducts} = useContext(DataContext)
+  // console.log(allProducts);
 
   const categories = ['All', 'Kids' , 'Women', 'Men', 'Footwear']
 
   const [curCategory,setcurCategory] = useState('All')
 
-  const products = data.filter((n,i)=>
+  const products = allProducts.filter((n,i)=>
   curCategory !== 'All' ? n.category === curCategory.toLowerCase() : n
 )
 
   return (
     <main className=' w-full lg:px-16 xl:px-280'>
       
+      {/* main: render banner component */}
+
       <Banner/>
 
       <section className='w-full flex flex-col'>
+
+      {/* main: category option section */}
 
         <header className='w-full bg-green-3000'>
             <h1 className=' text-4xl font-semibold text-center'>Top Trending</h1>
@@ -33,6 +42,8 @@ const MainSec = () => {
 
             </div>
         </header>
+        
+        {/* main: map over the products array to render each product */}
 
         <main className='w-full p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000'>
 
@@ -44,6 +55,8 @@ const MainSec = () => {
 
         <Link to='/products' className='bg-pink-600 text-white text-sm font-semibold px-5 py-3 mb-5 rounded-md mx-auto active:scale-95'>View More</Link>
           
+        {/* main: render new Items section */}
+        
         <NewItems/>
         
       </section>

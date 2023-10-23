@@ -1,14 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { BiSolidTrash } from 'react-icons/bi'
-import data from './data.json'
+import { useContext } from 'react'
+import DataContext from '../context/dataContext'
 const Final = () => {
 
-  const cartProducts = data.filter(n=>n.inCart)
+  const {cartProducts,handleCart} = useContext(DataContext)
   const totalPrice = cartProducts.reduce((acc,a)=>{return acc + a.price},0)
 
   return (
     <main className='w-full my-10 p-3 sm:px-10 lg:px-10 xl:px-32 lg:flex'>
+
+        {/* checkout: delivery information section*/}
 
         <aside className=' w-full lg:w-1/2 xl:px-5'>
 
@@ -63,7 +66,7 @@ const Final = () => {
                 </header>
 
                 <section className='minicart w-full p-2 max-h-60 flex flex-col overflow-y-scroll border border-gray-300 rounded-sm'>
-
+        {/* checkout: cart items */}
                 {cartProducts?.map((product,ind)=>(
                     <main className='h-24 w-full px-5 py-2 my-2 border border-gray-100 flex items-center justify-around rounded-sm' key={ind}>
 
@@ -76,7 +79,7 @@ const Final = () => {
                             <p className=' text-xs font-semibold text-start'>1 x ₹{product.price || 0}</p>
                         </Link>
         
-                        <span className=' bg-pink-100 p-2 rounded active:scale-95 transition-all'>
+                        <span onClick={()=>handleCart(product)} className=' bg-pink-100 p-2 rounded active:scale-95 transition-all'>
                             <BiSolidTrash className='h-5 w-5 cursor-pointer text-pink-600'/>
                         </span>
 
@@ -84,7 +87,8 @@ const Final = () => {
                 ))}
 
                 </section>
-
+        {/*checkout: price details section */}
+        
                 <section className='w-full flex flex-col items-center p-5 border border-gray-300 rounded-sm my-4'>
                 
                 <div className='w-5/6 h-12 flex justify-between items-center text-sm font-semibold'>

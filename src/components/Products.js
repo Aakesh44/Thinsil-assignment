@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {BiPlus,BiMinus} from 'react-icons/bi'
 import {FaFilter} from 'react-icons/fa'
-import data from './data.json'
+import data from '../data/data.json'
 import Card from './Card'
 const Products = () => {
 
@@ -18,6 +18,7 @@ const Products = () => {
   return (
     <main className='w-full lg:px-20 xl:px-32 mb-32 lg:flex justify-center bg-pink-1000'>
       
+    {/* products: filter section */}
 
       <aside className='block mx-auto w-4/5 lg:w-1/4 py-14 select-none'>
           <div className='w-full h-12 flex items-center gap-2 bg-cyan-3000 text-xl font-bold'><FaFilter className='h-5 w-5'/> <h1>FILTERS</h1></div>
@@ -70,9 +71,11 @@ const Products = () => {
 
           </section>
       </aside>
-        
-      <section className=' w-full lg:w-3/4 p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000'>
 
+    {/* products: render the products    */}
+    
+      <section className=' w-full lg:w-3/4 p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000'>
+          
           {data.map((product,i)=>(
             <Card product={product} size={true} key={i}/>
           ))}

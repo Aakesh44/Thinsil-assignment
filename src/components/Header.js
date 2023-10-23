@@ -1,20 +1,25 @@
 import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import logo from './images/logo14.png'
+import logo from '../images/logo14.png'
 import {BiSearch,BiHeart,BiSolidCartAlt,BiSolidLockOpenAlt} from 'react-icons/bi'
 import {MdOutlineAccountBox,MdPersonAddAlt1,MdClose} from 'react-icons/md'
 import {FiMenu} from 'react-icons/fi'
 
 import AOS from 'aos'
 import Minicart from './Minicart'
+import { useContext } from 'react'
+import DataContext from '../context/dataContext'
 
 const Header = () => {
+
+  const {likeProducts,cartProducts} = useContext(DataContext)
 
   const [profilePopup,setProfilePopUp] = useState(false)
   const [cartPopup,setCartPopup] = useState(false)
   const [sidebar,setSideBar] = useState(false)
 
+  // initializing the AOS 
   useEffect(() => {
     
       AOS.init({
@@ -22,12 +27,16 @@ const Header = () => {
       });
     
   }, []);
+
   return (
     <main className='sticky z-30 top-0 bg-white shadow-sm w-full h-20 md:h-24 border border-b-gray-100 flex items-center justify-between lg:px-16 xl:px-28 bg-greesn-300'>
       
+      {/* header: logo */}
 
       <Link to='/' style={{backgroundImage:`url(${logo})`}} className='h-full aspect-video bg-blend-screen bg-contain bg-center bg-no-repeat '></Link>
       
+      {/* header: search bar */}
+
       <section className='searchdiv w-52 sm:w-64 md:w-72 lg:w-96 h-10 p-1 flex justify-center items-center rounded-full overflow-hidden transition-all bg-gray-100 border-pink-2000 '>
 
         <input type="text" placeholder='Search items' className='w-full h-full px-3 bg-transparent outline-none border-0 placeholder:select-none placeholder:text-xs placeholder:text-gray-500'/>
@@ -38,15 +47,27 @@ const Header = () => {
 
       </section>
 
+
       <section className='hidden md:w-44 lg:w-52 h-full md:flex items-center justify-around bg-amber-0'>
 
-        <Link to='/wishlist' className='h-full w-1/3 flex items-center justify-center hover:text-pink-600'> <BiHeart className='h-6 w-6'/> </Link>
+        {/* header: wishlist icon and count*/}
+
+        <Link to='/wishlist' className='relative bg-pink-1000 h-full w-1/3 flex items-center justify-center hover:text-pink-600'> 
+          <BiHeart className='h-6 w-6'/> 
+          {likeProducts.length ? <span className=' absolute bg-pink-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs top-5 right-3'>{likeProducts?.length}</span>:<></>}
+        </Link>
+
+        {/* header: cartitems icon and count and render the minicart component */}
 
         <div className=' relative h-full w-1/3 flex items-center justify-center hover:text-pink-600 cursor-pointer' onMouseEnter={()=>setCartPopup(true)} onMouseLeave={()=>setCartPopup(false)}> 
           <BiSolidCartAlt className='h-6 w-6'/> 
+          
+          {cartProducts.length ? <span className=' absolute bg-pink-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs top-5 right-3'>{cartProducts?.length}</span>:<></>}
 
           {cartPopup && <Minicart setCartOpen={setCartPopup}/>}
         </div>
+        
+        {/* header: acc icon and render the signup/login option div */}
 
         <div className=' relative h-full w-1/3  flex items-center justify-center hover:text-pink-600 cursor-pointer' onMouseEnter={()=>setProfilePopUp(true)} onMouseLeave={()=>setProfilePopUp(false)}> 
           <MdOutlineAccountBox className='h-6 w-6'/> 
@@ -63,10 +84,14 @@ const Header = () => {
         </div>
 
       </section>
+      
+      {/* header: mobile menubar icon */}
 
       <div className='md:hidden cursor-pointer relative mx-1 text-pink-600' onClick={()=>setSideBar(!sidebar)}>
           {sidebar ? <MdClose className='h-5 w-5'/> : <FiMenu className='h-5 w-5'/> }
       </div>
+      
+      {/* header: mobile menubar section */}
       
       {sidebar && 
       <section style={{height:'60vh'}} className='absolute w-full md:hidden top-20 right-0 flex flex-col items-center justify-evenly grid-rows-4 bg-white transition-all' data-aos="fade-left" data-aos-duration="1000">

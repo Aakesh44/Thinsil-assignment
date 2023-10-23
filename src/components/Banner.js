@@ -8,9 +8,8 @@ const Banner = () => {
 
 
       <aside className='relative w-11/12 md:w-1/2 mx-auto h-60 pr-5 md:h-full flex flex-col items-center md:items-start justify-center gap-5 md:gap-10 bg-green-2000' data-aos="fade-right">
-        {/* <img className=' absolute h-10 w-10 top-5 left-5 animate-bounce animate-pulse' src="https://cdn-icons-png.flaticon.com/128/2252/2252540.png" alt="" /> */}
-        <img className=' absolute h-10 w-10 top-24 left- animate-bounce hidden md:block' src="https://cdn-icons-png.flaticon.com/128/64/64787.png" alt="" />
-
+        
+        <img className=' absolute h-10 w-10 top-24 left- animate-bounce hidden lg:block' src="https://cdn-icons-png.flaticon.com/128/64/64787.png" alt="" />
 
         <h1 className=' text-5xl sm:text-3l md:text-5xl lg:text-6xl xl:text-7xl font-bold whitespace-nowrap'>THINSIL MART</h1>
 
@@ -24,10 +23,10 @@ const Banner = () => {
         </div>
 
       </aside>
-      <aside className='w-11/12 md:w-1/2 h-60 mx-auto md:h-full bg-blend-multiply bg-contain bg-no-repeat bg-center bg-blue-1000' data-aos="fade-left" style={{backgroundImage:"url('https://img.freepik.com/free-vector/online-shopping-concept-illustration_114360-2713.jpg?w=996&t=st=1697889387~exp=1697889987~hmac=1aa714aec6ea90db51fb8110c6c19a5d376f338987e0afcba15038c07c2f8017')"}}>
+      <aside className='w-11/12 md:w-1/2 h-60 mx-auto md:h-full bg-blend-multiply bg-contain bg-no-repeat bg-center bg-blue-1000' data-aos="fade-left" 
+      style={{backgroundImage:"url('https://img.freepik.com/free-vector/online-shopping-concept-illustration_114360-2713.jpg?w=996&t=st=1697889387~exp=1697889987~hmac=1aa714aec6ea90db51fb8110c6c19a5d376f338987e0afcba15038c07c2f8017')"}}>
 
       </aside>
-      {/* <img className='h-5/6' src="https://img.freepik.com/free-vector/online-shopping-concept-illustration_114360-2713.jpg?w=996&t=st=1697889387~exp=1697889987~hmac=1aa714aec6ea90db51fb8110c6c19a5d376f338987e0afcba15038c07c2f8017" alt="" /> */}
 
 
 

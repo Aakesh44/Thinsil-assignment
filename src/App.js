@@ -1,18 +1,19 @@
 import './App.css';
 import { useEffect } from 'react';
-import Header from './Header'
-import Footer from './Footer'
-import MainSec from './MainSec'
-import Products from './Products'
-import SignUp from './SignUp'
-import Login from './LogIn'
-import Wishlist from './Wishlist'
-import Cart from './Cart'
-import SelectedProduct from './SelectedProduct'
-import Final from './Final'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import MainSec from './components/MainSec'
+import Products from './components/Products'
+import SignUp from './components/SignUp'
+import Login from './components/LogIn'
+import Wishlist from './components/Wishlist'
+import Cart from './components/Cart'
+import SelectedProduct from './components/SelectedProduct'
+import Final from './components/Final'
 import { Routes,Route,useLocation } from 'react-router-dom';
 import Aos from 'aos';
-import Notfound from './Notfound';
+import Notfound from './components/Notfound';
+import { DataProvider } from './context/dataContext';
 
 function App() {
 
@@ -24,6 +25,8 @@ function App() {
 
   },[location.pathname])
 
+  // initializing AOS
+
   useEffect(() => {
     Aos.init({
       once: true,
@@ -33,7 +36,8 @@ function App() {
 
   return (
     <main className="App relative">
-      
+    <DataProvider>
+
       <Header/>
 
       <section>
@@ -61,7 +65,8 @@ function App() {
       </section>
 
       <Footer/>
-
+      
+    </DataProvider>
     </main>
   );
 }

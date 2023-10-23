@@ -1,30 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {BiSolidHeart,BiSolidCartAlt,BiSolidRightTopArrowCircle,BiLoaderCircle,BiCartAlt,BiHeart} from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
-import data from './data.json'
+import { useContext } from 'react'
+import DataContext from '../context/dataContext'
 
 const Card = ({product,size}) => {
 
+    const {allProducts,handleLike,cartProducts,likeProducts,handleCart} = useContext(DataContext)
 
-    const Item = data.find(n=>n.id === product.id)
+    let Item = allProducts.find(n=>n.id === product.id)
 
     const [cardHover,setCardHover] = useState(false)
 
-    const [heartAction,setHeartAction] = useState(Item.like)
-    const [cartAction,setCartAction] = useState(Item.inCart)
+    const [heartAction,setHeartAction] = useState(likeProducts.some(n=>n.id === product.id))
+    const [cartAction,setCartAction] = useState(cartProducts.some(n=>n.id === product.id))
 
     function handleHeart() {
-        let temp = heartAction
         setTimeout(()=>{
-            setHeartAction(!temp)
+            handleLike(Item)
         },1000)
         setHeartAction('load')
     }
 
-    function handleCart() {
-        let temp = cartAction
+    function handleCartt() {
         setTimeout(() => {
-            setCartAction(!temp)
+            handleCart(Item)
         }, 1000);
 
         setCartAction('load')
@@ -34,6 +34,13 @@ const Card = ({product,size}) => {
     function goToProduct() {
         navigate(`/products/${product.id}`)
     }
+
+    useEffect(()=>{
+        Item = allProducts.find(n=>n.id === product.id )
+        setHeartAction(likeProducts.some(n=>n.id === product.id))
+        setCartAction(cartProducts.some(n=>n.id === product.id))      
+        console.log(Item);  
+    },[cartProducts,likeProducts])
 
     return (
     <main className={`w-full sm:w-1/2 md:w-1/3 ${size ? "lg:w-1/2 xl:w-1/3" : "lg:w-1/3 xl:w-1/4"} p-5 bg-red-5000 flex items-center justify-center select-none `} style={{aspectRatio:'4/5'}}>
@@ -53,7 +60,7 @@ const Card = ({product,size}) => {
                             {/* {product.like ? <BiSolidHeart className='cardIcons' /> : <BiHeart className='cardIcons' />} */}
                             {heartAction === 'load' ? <BiLoaderCircle className='cardIcons animate-spin' /> : heartAction ? <BiSolidHeart className='cardIcons' /> : <BiHeart className='cardIcons' />}
                         </span>
-                        <span onClick={handleCart} data-aos="fade-up" data-aos-duration="400">
+                        <span onClick={handleCartt} data-aos="fade-up" data-aos-duration="400">
                             {cartAction === 'load' ? <BiLoaderCircle className='cardIcons animate-spin' /> : cartAction ? <BiSolidCartAlt className='cardIcons' /> : <BiCartAlt className='cardIcons' />}
                         </span>
 
