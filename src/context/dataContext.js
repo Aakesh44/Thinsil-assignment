@@ -23,7 +23,7 @@ const [orders,setOrders] = useState([])
 async function getProducts() {
     try {
         
-        const response = await axios.get('http://localhost:4000/products')
+        const response = await axios.get('https://fake-store-server.vercel.app/products')
         const data = await response.data
         // console.log('All products fetched');
         setProducts(data)
@@ -45,7 +45,7 @@ function handleUser() {
 async function getMainUser() {
     try {
         
-        const response = await axios.get(`http://localhost:4000/user/${userId}`)
+        const response = await axios.get(`https://fake-store-server.vercel.app/user/${userId}`)
         const data = await response.data
         setMainUser(data)
         // console.log('user data fetched');
@@ -58,7 +58,7 @@ async function getOrders() {
 
   if(userId){
     try {
-      const response = await axios.get(`http://localhost:4000/fetchOrder/${userId}`)
+      const response = await axios.get(`https://fake-store-server.vercel.app/fetchOrder/${userId}`)
       setOrders(response.data)
     //   console.log(response.data);
     } catch (error) {
@@ -94,6 +94,11 @@ useEffect(()=>{
 },[products,mainUser])
 
 async function handleAddToCart(productId) {
+
+    if( !mainUser ) {
+        navigate('/signup')
+        return
+    } 
     try {
       const config = {
           headers: {
@@ -102,7 +107,7 @@ async function handleAddToCart(productId) {
       }
 
       const response = await axios.put(
-          "http://localhost:4000/addToCart",
+          "https://fake-store-server.vercel.app/addToCart",
           {
             userId:mainUser._id,
             productId:productId 
@@ -119,6 +124,11 @@ async function handleAddToCart(productId) {
 }
 
 async function handleRemoveFromCart(productId) {
+    if( !mainUser ) {
+        navigate('/signup')
+        return
+    } 
+
     try {
         const config = {
             headers: {
@@ -127,7 +137,7 @@ async function handleRemoveFromCart(productId) {
         }
 
         const response = await axios.put(
-            "http://localhost:4000/removeFromCart",
+            "https://fake-store-server.vercel.app/removeFromCart",
             {
                 userId:mainUser._id,
                 productId:productId
@@ -144,6 +154,11 @@ async function handleRemoveFromCart(productId) {
 }
 
 async function handleLikeProduct(productId) {
+    if( !mainUser ) {
+        navigate('/signup')
+        return
+    } 
+
     try {
       const config = {
         headers: {
@@ -151,7 +166,7 @@ async function handleLikeProduct(productId) {
         }
     }
     const response = await axios.put(
-      "http://localhost:4000/like",
+      "https://fake-store-server.vercel.app/like",
       {
         userId:mainUser._id,
         productId:productId
@@ -168,6 +183,12 @@ async function handleLikeProduct(productId) {
 }
 
 async function handleDislikeProduct(productId) {
+
+    if( !mainUser ) {
+        navigate('/signup')
+        return
+    } 
+
     try {
       const config = {
           headers: {
@@ -176,7 +197,7 @@ async function handleDislikeProduct(productId) {
       }
 
       const response = await axios.put(
-          "http://localhost:4000/dislike",
+          "https://fake-store-server.vercel.app/dislike",
           {
             userId:mainUser._id,
             productId:productId
@@ -194,6 +215,10 @@ async function handleDislikeProduct(productId) {
 
 async function handlePlacingOrder() {
 
+    if(!mainUser) {
+        navigate('/signup')
+        return
+    }
     if(!cartProducts.length) return 
     const productsIds = cartProducts.map(n=>n._id)
     const price = cartProducts.reduce((acc,a)=>{return acc + a.price},0)
@@ -209,7 +234,7 @@ async function handlePlacingOrder() {
         }
 
         const response = await axios.post(
-            "http://localhost:4000/orderPlace",
+            "https://fake-store-server.vercel.app/orderPlace",
             {
                 userId:mainUser._id,
                 productsId:productsIds,
@@ -237,7 +262,7 @@ function handleSearchProducts(e,searchQuery) {
 
         
         if(title.includes(query)){
-            console.log(title,query);
+            // console.log(title,query);
             return true
         }
         else{
@@ -249,6 +274,12 @@ function handleSearchProducts(e,searchQuery) {
     setSearchProducts([...items])
     // console.log(items);
     navigate('/products')
+}
+
+const handleLogOut =()=>{
+  localStorage.removeItem('store-user')
+  navigate('/')
+  window.location.reload()
 }
 
 return(
@@ -271,7 +302,9 @@ return(
         handleSearchProducts,
 
         orders,
-        handlePlacingOrder
+        handlePlacingOrder,
+
+        handleLogOut
     }}>
 
         {children}

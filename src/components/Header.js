@@ -15,7 +15,7 @@ import SearchSec from './SearchSec'
 
 const Header = () => {
 
-  const {mainUser,likedProducts,cartProducts} = useContext(DataContext)
+  const {mainUser,likedProducts,cartProducts,handleLogOut} = useContext(DataContext)
 
   const [profilePopup,setProfilePopUp] = useState(false)
   const [cartPopup,setCartPopup] = useState(false)
@@ -45,7 +45,7 @@ const Header = () => {
 
         {/* header: wishlist icon and count*/}
 
-        <Link to='/wishlist' className='relative bg-pink-1000 h-full w-1/3 flex items-center justify-center hover:text-pink-600'> 
+        <Link to={mainUser ?'/wishlist' : '/signup'} className='relative bg-pink-1000 h-full w-1/3 flex items-center justify-center hover:text-pink-600'> 
           <BiHeart className='h-6 w-6'/> 
           {likedProducts.length ? <span className=' absolute bg-pink-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs top-5 right-3'>{likedProducts?.length}</span>:<></>}
         </Link>
@@ -67,10 +67,10 @@ const Header = () => {
 
           {(profilePopup && mainUser) ?
 
-            <div className=' absolute top-full right-0 lg:left-0 z-10 w-32 xl:w-40 h-28 px-2 flex flex-col items-center justify-center rounded bg-white text-black drop-shadow-md cursor-default' data-aos="fade-up"  data-aos-duration="500">
-                <Link to='/user/profile' onClick={()=>setProfilePopUp(false)}  className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <RiAccountPinBoxFill    className='h-4 w-4 text-pink-500'/> <h1>Account</h1> </Link>
-                <Link to='/user/orders'  onClick={()=>setProfilePopUp(false)} className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <RiLuggageCartLine  className='h-4 w-4 text-pink-500'/> <h1>My Orders</h1> </Link>
-                <Link to='/login'        onClick={()=>setProfilePopUp(false)} className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <BiSolidLockOpen  className='h-4 w-4 text-pink-500'/> <h1>SignOut</h1> </Link>
+            <div onClick={()=>setProfilePopUp(false)} className=' absolute top-full right-0 lg:left-0 z-10 w-32 xl:w-40 h-28 px-2 flex flex-col items-center justify-center rounded bg-white text-black drop-shadow-md cursor-default' data-aos="fade-up"  data-aos-duration="500">
+                <Link to='/user/profile'  className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <RiAccountPinBoxFill    className='h-4 w-4 text-pink-500'/> <h1>Account</h1> </Link>
+                <Link to='/user/orders'  className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <RiLuggageCartLine  className='h-4 w-4 text-pink-500'/> <h1>My Orders</h1> </Link>
+                <button  onClick={handleLogOut} className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <BiSolidLockOpen  className='h-4 w-4 text-pink-500'/> <h1>SignOut</h1> </button>
 
             </div>:
             profilePopup &&
@@ -93,7 +93,16 @@ const Header = () => {
       
       {/* header: mobile menubar section */}
       
-      {sidebar && 
+      {(sidebar && mainUser) ?
+      <section style={{height:'60vh'}} className='absolute w-full md:hidden top-20 right-0 flex flex-col items-center justify-evenly grid-rows-4 bg-white transition-all' data-aos="fade-left" data-aos-duration="1000">
+        
+        <Link to='/wishlist' onClick={()=>setSideBar(false)} className=' bg-pink-400 text-black h-10 w-64 flex items-center justify-center rounded-md text-base font-semibold shadow-sm hover:scale-95 active:scale-95'>wishlist</Link>
+        <Link to='/cart'     onClick={()=>setSideBar(false)} className=' bg-pink-400 text-black h-10 w-64 flex items-center justify-center rounded-md text-base font-semibold shadow-sm hover:scale-95 active:scale-95'>cart items</Link>
+        <Link to='/user/profile'   onClick={()=>setSideBar(false)} className=' bg-pink-400 text-black h-10 w-64 flex items-center justify-center rounded-md text-base font-semibold shadow-sm hover:scale-95 active:scale-95'>profile</Link>
+        <Link to='/user/orders'    onClick={()=>setSideBar(false)} className=' bg-pink-400 text-black h-10 w-64 flex items-center justify-center rounded-md text-base font-semibold shadow-sm hover:scale-95 active:scale-95'>orders</Link>
+
+      </section>:
+      sidebar && 
       <section style={{height:'60vh'}} className='absolute w-full md:hidden top-20 right-0 flex flex-col items-center justify-evenly grid-rows-4 bg-white transition-all' data-aos="fade-left" data-aos-duration="1000">
         
         <Link to='/wishlist' onClick={()=>setSideBar(false)} className=' bg-pink-400 text-black h-10 w-64 flex items-center justify-center rounded-md text-base font-semibold shadow-sm hover:scale-95 active:scale-95'>wishlist</Link>

@@ -6,7 +6,7 @@ import DataContext from '../context/dataContext'
 
 const Minicart = ({setCartOpen}) => {
 
-  const {cartProducts,handleRemoveFromCart} = useContext(DataContext)
+  const {mainUser,cartProducts,handleRemoveFromCart} = useContext(DataContext)
 
   const totalPrice = cartProducts.reduce((acc,a)=>{return acc + a.price},0)
 
@@ -49,9 +49,9 @@ const Minicart = ({setCartOpen}) => {
               <h1>₹{totalPrice}</h1>
             </div>
 
-            <Link to="/checkout" onClick={()=>setCartOpen(false)} className=' bg-pink-600 text-white h-10 w-5/6 mx-auto my-auto flex items-center justify-center rounded-md text-xs font-bold active:scale-95'>PROCEED TO CHECKOUT</Link>
+            <Link to={mainUser ?"/checkout" : '/signup'} onClick={()=>setCartOpen(false)} className=' bg-pink-600 text-white h-10 w-5/6 mx-auto my-auto flex items-center justify-center rounded-md text-xs font-bold active:scale-95'>PROCEED TO CHECKOUT</Link>
 
-            <Link to='/cart' onClick={()=>setCartOpen(false)} className=' border-2 border-black text-black h-10 w-5/6 mx-auto my-auto rounded-md text-xs font-bold flex items-center justify-center active:scale-95'>VIEW CART</Link>
+            <Link to={mainUser ?'/cart' : '/signup'} onClick={()=>setCartOpen(false)} className=' border-2 border-black text-black h-10 w-5/6 mx-auto my-auto rounded-md text-xs font-bold flex items-center justify-center active:scale-95'>VIEW CART</Link>
 
         </aside>
 
