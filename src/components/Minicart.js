@@ -6,7 +6,8 @@ import DataContext from '../context/dataContext'
 
 const Minicart = ({setCartOpen}) => {
 
-  const {cartProducts,handleCart} = useContext(DataContext)
+  const {cartProducts,handleRemoveFromCart} = useContext(DataContext)
+
   const totalPrice = cartProducts.reduce((acc,a)=>{return acc + a.price},0)
 
   return (
@@ -20,16 +21,16 @@ const Minicart = ({setCartOpen}) => {
 
             <main key={ind} className='h-24 w-full px-5 py-2 my-2 border-2 border-gray-300 flex items-center justify-around rounded-sm'>
 
-                <Link to={`/products/${product.id || ""}`} className='w-1/4' onClick={()=>setCartOpen(false)}>
+                <Link to={`/products/${product._id || ""}`} className='w-1/4' onClick={()=>setCartOpen(false)}>
                     <img src={product.img || ""} alt="" className='h-full w-14'/>
                 </Link>
 
-                <Link to={`/products/${product.id || ""}`} className='w-2/3 overflow-hidden px-2' onClick={()=>setCartOpen(false)}>
+                <Link to={`/products/${product._id || ""}`} className='w-2/3 overflow-hidden px-2' onClick={()=>setCartOpen(false)}>
                     <h1  className=' text-sm font-semibold my-2 truncate'>{product.title || ""}</h1>
                     <p className=' text-xs font-semibold text-start'>1 x ₹{product.price || ""}</p>
                 </Link>
    
-                 <span onClick={()=>handleCart(product)} className=' bg-pink-100 p-2 rounded active:scale-95 transition cursor-pointer'>
+                 <span onClick={()=>handleRemoveFromCart(product?._id)} className=' bg-pink-100 p-2 rounded active:scale-95 transition cursor-pointer'>
                     <BiSolidTrash className='h-5 w-5 cursor-pointer text-pink-600'/>
                 </span>
 

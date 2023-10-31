@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Card from './Card'
-
-import data from '../data/data.json'
+import DataContext from '../context/dataContext'
 
 const NewItems = () => {
 
-  const newProducts = data.filter((n,i)=> ( i === 0 || i === 5 || i === 9 || i === 13))
+  const {products} = useContext(DataContext)
+
+  const ids = [0,10,20,30]
+  const newProducts = products.filter((_,i)=> ids.includes(i))
 
   
   return (
@@ -15,7 +17,7 @@ const NewItems = () => {
       <main className='w-full p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000'>
         
         {newProducts.map((product,ind)=>(
-          <Card key={ind} product ={product}/>
+          <Card key={ind} productId ={product?._id}/>
         ))}
              
            

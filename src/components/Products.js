@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {BiPlus,BiMinus} from 'react-icons/bi'
 import {FaFilter} from 'react-icons/fa'
-import data from '../data/data.json'
 import Card from './Card'
+import DataContext from '../context/dataContext'
 const Products = () => {
 
-  const categories = ['Kids','Women','Men','Footwear']
+  const {searchProducts} = useContext(DataContext)
+  // console.log(searchProducts);
+
+  const categories = [ "Kids' Wear" , "Women Clothing", 'Men Clothing','Accessories','Cosmetics','Footwear','Electronics','Home decor']
   const Brands = ['AAA' , 'BBB', 'CCC', 'DDD']
   const Prices = ['< 500 ' , '500 - 800', '800 - 1200', '1200 >']
   const Sizes = ['S' , 'M', 'L', 'XL','XXL']
@@ -15,6 +18,8 @@ const Products = () => {
   const [priceOpen,setpriceOpen] = useState(false)
   const [sizeOpen,setsizeOpen] = useState(false)
   
+  
+
   return (
     <main className='w-full lg:px-20 xl:px-32 mb-32 lg:flex justify-center bg-pink-1000'>
       
@@ -76,9 +81,15 @@ const Products = () => {
     
       <section className=' w-full lg:w-3/4 p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000'>
           
-          {data.map((product,i)=>(
-            <Card product={product} size={true} key={i}/>
+          {searchProducts.map((product,i)=>(
+            <Card productId={product._id} size={true} key={i}/>
           ))}
+          
+          
+          {!searchProducts.length && 
+          <div className='mx-auto my-auto font-semibold h-64 lg:h-96 aspect-square bg-center bg-cover bg-no-repeat bg-blend-screen' style={{ backgroundImage: `url("https://img.freepik.com/premium-vector/computer-forensics-abstract-concept-vector-illustration_107173-28350.jpg?size=626&ext=jpg&uid=R107810290&ga=GA1.1.395143972.1697631505&semt=ais")` }}>
+            <p className=' text-center'>No Search Results</p>
+          </div>}
 
       </section>
     </main>

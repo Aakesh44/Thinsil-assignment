@@ -2,18 +2,20 @@ import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import logo from '../images/logo14.png'
-import {BiSearch,BiHeart,BiSolidCartAlt,BiSolidLockOpenAlt} from 'react-icons/bi'
+import {BiHeart,BiCartAlt,BiSolidLockOpenAlt,BiSolidLockOpen} from 'react-icons/bi'
 import {MdOutlineAccountBox,MdPersonAddAlt1,MdClose} from 'react-icons/md'
 import {FiMenu} from 'react-icons/fi'
+import {RiLuggageCartLine,RiAccountPinBoxFill} from 'react-icons/ri'
 
 import AOS from 'aos'
 import Minicart from './Minicart'
 import { useContext } from 'react'
 import DataContext from '../context/dataContext'
+import SearchSec from './SearchSec'
 
 const Header = () => {
 
-  const {likeProducts,cartProducts} = useContext(DataContext)
+  const {mainUser,likedProducts,cartProducts} = useContext(DataContext)
 
   const [profilePopup,setProfilePopUp] = useState(false)
   const [cartPopup,setCartPopup] = useState(false)
@@ -37,16 +39,7 @@ const Header = () => {
       
       {/* header: search bar */}
 
-      <section className='searchdiv w-52 sm:w-64 md:w-72 lg:w-96 h-10 p-1 flex justify-center items-center rounded-full overflow-hidden transition-all bg-gray-100 border-pink-2000 '>
-
-        <input type="text" placeholder='Search items' className='w-full h-full px-3 bg-transparent outline-none border-0 placeholder:select-none placeholder:text-xs placeholder:text-gray-500'/>
-
-        <button className='w-10 h-full flex justify-center items-center'>
-          <BiSearch className=' h-5 md:h-6 w-5 md:w-6 text-pink-700'/>
-        </button>
-
-      </section>
-
+        <SearchSec/>
 
       <section className='hidden md:w-44 lg:w-52 h-full md:flex items-center justify-around bg-amber-0'>
 
@@ -54,13 +47,13 @@ const Header = () => {
 
         <Link to='/wishlist' className='relative bg-pink-1000 h-full w-1/3 flex items-center justify-center hover:text-pink-600'> 
           <BiHeart className='h-6 w-6'/> 
-          {likeProducts.length ? <span className=' absolute bg-pink-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs top-5 right-3'>{likeProducts?.length}</span>:<></>}
+          {likedProducts.length ? <span className=' absolute bg-pink-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs top-5 right-3'>{likedProducts?.length}</span>:<></>}
         </Link>
 
         {/* header: cartitems icon and count and render the minicart component */}
 
         <div className=' relative h-full w-1/3 flex items-center justify-center hover:text-pink-600 cursor-pointer' onMouseEnter={()=>setCartPopup(true)} onMouseLeave={()=>setCartPopup(false)}> 
-          <BiSolidCartAlt className='h-6 w-6'/> 
+          <BiCartAlt className='h-6 w-6'/> 
           
           {cartProducts.length ? <span className=' absolute bg-pink-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs top-5 right-3'>{cartProducts?.length}</span>:<></>}
 
@@ -72,12 +65,19 @@ const Header = () => {
         <div className=' relative h-full w-1/3  flex items-center justify-center hover:text-pink-600 cursor-pointer' onMouseEnter={()=>setProfilePopUp(true)} onMouseLeave={()=>setProfilePopUp(false)}> 
           <MdOutlineAccountBox className='h-6 w-6'/> 
 
-          {profilePopup &&
+          {(profilePopup && mainUser) ?
 
-          <div className=' absolute top-full right-0 lg:left-0 z-10 w-32 xl:w-40 h-28 px-2 flex flex-col items-center justify-center rounded bg-white text-black drop-shadow-md cursor-default' data-aos="fade-up"  data-aos-duration="500">
-              <Link to='/signup' className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <MdPersonAddAlt1    className='h-4 w-4 text-pink-500'/> <h1>Signup</h1> </Link>
-              <Link to='/login' className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <BiSolidLockOpenAlt  className='h-4 w-4 text-pink-500'/> <h1>Login</h1> </Link>
-          </div>
+            <div className=' absolute top-full right-0 lg:left-0 z-10 w-32 xl:w-40 h-28 px-2 flex flex-col items-center justify-center rounded bg-white text-black drop-shadow-md cursor-default' data-aos="fade-up"  data-aos-duration="500">
+                <Link to='/user/profile' onClick={()=>setProfilePopUp(false)}  className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <RiAccountPinBoxFill    className='h-4 w-4 text-pink-500'/> <h1>Account</h1> </Link>
+                <Link to='/user/orders'  onClick={()=>setProfilePopUp(false)} className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <RiLuggageCartLine  className='h-4 w-4 text-pink-500'/> <h1>My Orders</h1> </Link>
+                <Link to='/login'        onClick={()=>setProfilePopUp(false)} className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <BiSolidLockOpen  className='h-4 w-4 text-pink-500'/> <h1>SignOut</h1> </Link>
+
+            </div>:
+            profilePopup &&
+            <div className=' absolute top-full right-0 lg:left-0 z-10 w-32 xl:w-40 h-28 px-2 flex flex-col items-center justify-center rounded bg-white text-black drop-shadow-md cursor-default' data-aos="fade-up"  data-aos-duration="500">
+                <Link to='/signup' className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <MdPersonAddAlt1    className='h-4 w-4 text-pink-500'/> <h1>Signup</h1> </Link>
+                <Link to='/login' className='flex gap-2 text-xs font-semibold items-center w-full h-12 hover:bg-gray-100 rounded-sm'> <BiSolidLockOpenAlt  className='h-4 w-4 text-pink-500'/> <h1>Login</h1> </Link>
+            </div>
 
           }
 

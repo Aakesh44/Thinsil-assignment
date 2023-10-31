@@ -14,6 +14,8 @@ import { Routes,Route,useLocation } from 'react-router-dom';
 import Aos from 'aos';
 import Notfound from './components/Notfound';
 import { DataProvider } from './context/dataContext';
+import Profile from './components/Profile';
+import Orders from './components/Orders';
 
 function App() {
 
@@ -52,6 +54,10 @@ function App() {
           <Route path='/signup' element ={ <SignUp/> }/>
 
           <Route path='/login' element ={ <Login/> }/>
+          
+          <Route path='/user/profile' element= {<Profile/>}/>
+          
+          <Route path='/user/orders' element={<Orders/>}/>
 
           <Route path='/wishlist' element ={ <Wishlist/> }/>
 

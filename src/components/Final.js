@@ -5,8 +5,11 @@ import { useContext } from 'react'
 import DataContext from '../context/dataContext'
 const Final = () => {
 
-  const {cartProducts,handleCart} = useContext(DataContext)
+  const {cartProducts,handleRemoveFromCart,handlePlacingOrder} = useContext(DataContext)
+
   const totalPrice = cartProducts.reduce((acc,a)=>{return acc + a.price},0)
+
+  let subTotal = totalPrice - ((totalPrice*10)/100)
 
   return (
     <main className='w-full my-10 p-3 sm:px-10 lg:px-10 xl:px-32 lg:flex'>
@@ -38,17 +41,22 @@ const Final = () => {
 
                 <div className='h-20 flex flex-col justify-around mb-4'>
                     <label htmlFor="Country">Country* </label>
-                    <input type="password" id='Country' className='w-full mx-auto focus:outline outline-pink-500 border h-10 rounded-md text-sm font-semibold px-3 bg-gray-50 border-gray-200' placeholder='Country'/>
+                    <input type="text" id='Country' className='w-full mx-auto focus:outline outline-pink-500 border h-10 rounded-md text-sm font-semibold px-3 bg-gray-50 border-gray-200' placeholder='Country'/>
                 </div>
 
                 <div className='h-20 flex flex-col justify-around mb-4'>
                     <label htmlFor="State">State * </label>
-                    <input type="password" id='State' className='w-full mx-auto focus:outline outline-pink-500 border h-10 rounded-md text-sm font-semibold px-3 bg-gray-50 border-gray-200' placeholder='State'/>
+                    <input type="text" id='State' className='w-full mx-auto focus:outline outline-pink-500 border h-10 rounded-md text-sm font-semibold px-3 bg-gray-50 border-gray-200' placeholder='State'/>
                 </div>
 
                 <div className='h-20 flex flex-col justify-around mb-4'>
+                    <label htmlFor="Pincode">Pincode * </label>
+                    <input type="text" id='Pincode' className='w-full mx-auto focus:outline outline-pink-500 border h-10 rounded-md text-sm font-semibold px-3 bg-gray-50 border-gray-200' placeholder='Pincode'/>
+                </div>  
+
+                <div className='h-20 flex flex-col justify-around mb-4'>
                     <label htmlFor="Address">Delivery Address * </label>
-                    <input type="password" id='Address' className='w-full mx-auto focus:outline outline-pink-500 border h-10 rounded-md text-sm font-semibold px-3 bg-gray-50 border-gray-200' placeholder='Delivery Address'/>
+                    <input type="text" id='Address' className='w-full mx-auto focus:outline outline-pink-500 border h-10 rounded-md text-sm font-semibold px-3 bg-gray-50 border-gray-200' placeholder='Delivery Address'/>
                 </div>   
                 
                 <div className='h-fit flex flex-col gap-3 justify-around mb-4'>
@@ -67,19 +75,20 @@ const Final = () => {
 
                 <section className='minicart w-full p-2 max-h-60 flex flex-col overflow-y-scroll border border-gray-300 rounded-sm'>
         {/* checkout: cart items */}
+
                 {cartProducts?.map((product,ind)=>(
                     <main className='h-24 w-full px-5 py-2 my-2 border border-gray-100 flex items-center justify-around rounded-sm' key={ind}>
 
-                        <Link to={`/products/${product.id || ""}`} className='w-1/6' >
+                        <Link to={`/products/${product._id || ""}`} className='w-1/6' >
                             <img src={product.img || ""} alt="" className='h-full w-14'/>
                         </Link>
 
-                        <Link to={`/products/${product.id || ""}`} className='w-2/3 overflow-hidden px-2' >
+                        <Link to={`/products/${product._id || ""}`} className='w-2/3 overflow-hidden px-2' >
                             <h1  className=' text-sm font-semibold my-2 truncate'>{product.title || ""}</h1>
-                            <p className=' text-xs font-semibold text-start'>1 x ₹{product.price || 0}</p>
+                            <p className=' text-xs font-semibold text-start text-pink-600'>1 x ₹{product.price || 0}</p>
                         </Link>
         
-                        <span onClick={()=>handleCart(product)} className=' bg-pink-100 p-2 rounded active:scale-95 transition-all'>
+                        <span onClick={()=>handleRemoveFromCart(product?._id)} className=' bg-pink-100 p-2 rounded active:scale-95 transition-all cursor-pointer'>
                             <BiSolidTrash className='h-5 w-5 cursor-pointer text-pink-600'/>
                         </span>
 
@@ -87,6 +96,7 @@ const Final = () => {
                 ))}
 
                 </section>
+                
         {/*checkout: price details section */}
         
                 <section className='w-full flex flex-col items-center p-5 border border-gray-300 rounded-sm my-4'>
@@ -98,12 +108,12 @@ const Final = () => {
 
                 <div className='w-5/6 h-12 flex justify-between items-center text-sm font-semibold'>
                     <h1>Coupon Discount</h1>
-                    <p>₹100</p>
+                    <p>10 %</p>
                 </div>
 
                 <div className='w-5/6 h-12 flex justify-between items-center text-sm font-semibold'>
                     <h1>Subtotal</h1>
-                    <p>₹{totalPrice - 100 || 0}</p>
+                    <p>₹{ subTotal.toFixed(0)}</p>
                 </div>
                 <div className='w-5/6 h-12 flex justify-between items-center text-sm font-semibold'>
                     <h1>IGST</h1>
@@ -117,10 +127,10 @@ const Final = () => {
 
                 <div className='w-5/6 h-12 flex justify-between items-center text-base text-pink-600 font-bold'>
                     <h1>Grand Total</h1>
-                    <p>₹{totalPrice - 100 || 0}</p>
+                    <p>₹{subTotal.toFixed(0) || 0}</p>
                 </div>
 
-                <Link to="/" className=' bg-pink-700 text-gray-50 h-12 w-5/6 mx-auto my-5 rounded-md text-xs font-bold active:scale-95 transition flex items-center justify-center'>Place Order</Link>
+                <button disabled={cartProducts.length === 0} onClick={handlePlacingOrder} className=' bg-pink-700 text-gray-50 h-12 w-5/6 mx-auto my-5 rounded-md text-xs font-bold active:scale-95 transition flex items-center justify-center'>Place Order</button>
 
 
                 </section>                

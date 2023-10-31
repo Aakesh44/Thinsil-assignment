@@ -5,26 +5,42 @@ import { Link, useParams } from 'react-router-dom'
 import DataContext from '../context/dataContext'
 const SelectedProduct = () => {
 
-  const {handleLike,cartProducts,likeProducts,handleCart,allProducts} = useContext(DataContext)
+  const {mainUser,products,handleLikeProduct,handleDislikeProduct,handleAddToCart,handleRemoveFromCart,} = useContext(DataContext)
 
   const ID = useParams().id
+  // console.log(ID);
   
-  let product = allProducts.find((n)=> n.id === parseInt(ID)) 
+  let Item = products.find(n=>n._id === ID)
+  // console.log(Item);
 
   const Sizes = ['S' , 'M', 'L', 'XL','XXL']
 
   const [count,setCount] = useState(1)
 
-  const [heartAction,setHeartAction] = useState(likeProducts.some(n=>n.id === product.id))
-  const [cartAction,setCartAction] = useState(cartProducts.some(n=>n.id === product.id))
-
   const [sharePopup,setSharePopup] = useState(false)
 
- useEffect(()=>{
-    product = allProducts.find((n)=> n.id === parseInt(ID)) 
-    setHeartAction(likeProducts.some(n=>n.id === product.id))
-    setCartAction(cartProducts.some(n=>n.id === product.id))
- },[cartProducts,likeProducts])
+  const [liked,setLiked] = useState(mainUser?.likedProducts?.includes(Item?._id))
+  const [inCart,setInCart] = useState(mainUser?.cartProducts?.includes(Item?._id))
+
+  function handleLike() {
+    if(liked){
+      handleDislikeProduct(Item?._id)
+    }
+    else{
+      handleLikeProduct(Item?._id)
+    }
+    setLiked( !liked )
+  }
+
+  function handleCart() {
+    if(inCart){
+      handleRemoveFromCart(Item?._id)
+    }
+    else{
+      handleAddToCart(Item?._id)
+    }
+    setInCart( !inCart )
+  }
 
   return (
     <main className='w-full mt-10 lg:px-20 xl:px-32'>
@@ -33,7 +49,7 @@ const SelectedProduct = () => {
       {/* product: img */}
 
         <aside className=' w-2/3 mx-auto md:w-2/5 p-2 lg:p-10 bg-cyan-2000 select-none'>
-          <img src={product?.img || ""} alt="" className=' shadow-sm border' style={{aspectRatio:'3/4'}}/>
+          <img src={Item?.img || ""} alt="" className=' shadow-sm border' style={{aspectRatio:'3/4'}}/>
         </aside>
 
       {/* product: details  */}
@@ -42,8 +58,8 @@ const SelectedProduct = () => {
 
           <header className='w-full flex bg-red-2000'>
             <div className='py-4'>
-              <h1 className='text-2xl font-bold my-1'>{product?.title || ""}</h1>
-              <p className='text-sm text-gray-600'>{product?.description || ""} 💥😌</p>
+              <h1 className='text-2xl font-bold my-1'>{Item?.title || ""}</h1>
+              <p className='text-sm text-gray-600'>{Item?.description || ""} 💥😌</p>
             </div>
 
             <div onClick={()=>setSharePopup(prev=>!prev)}  className='relative flex items-center justify-center gap-1 text-sm font-semibold ml-auto cursor-pointer'>
@@ -65,17 +81,21 @@ const SelectedProduct = () => {
 
           </header>
 
-          <h1 className=' text-3xl font-bold text-pink-600 py-5'>₹{product?.price || ""}.00</h1>
+          <h1 className=' text-3xl font-bold text-pink-600 py-5'>₹{Item?.price || ""}.00</h1>
 
           <div className='w-full flex py-5 select-none'>
 
-            <div onClick={()=>handleLike(product)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
-              {heartAction ? <BiSolidHeart className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiHeart className='h-6 w-6 active:scale-150 text-black transition'/>} 
-              <p>Add to wishlist</p>
+            <div onClick={handleLike} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
+
+              {liked ? <BiSolidHeart className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiHeart className='h-6 w-6 active:scale-150 text-pink-500  transition'/>}
+              <p>{liked ? "Remove from wishlist" : "Add to wishlist" }</p>
+
             </div>
-            <div onClick={()=>handleCart(product)} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
-              {cartAction ? <BiSolidCartAlt className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiCartAlt className='h-6 w-6 active:scale-150 text-black transition'/>} 
-              <p>Add to cart</p>
+            <div onClick={handleCart} className='w-1/2 text-sm font-semibold flex items-center justify-start gap-2 cursor-default'>
+
+              {inCart ? <BiSolidCartAlt className='h-6 w-6 active:scale-150 text-pink-500  transition'/>: <BiCartAlt className='h-6 w-6 active:scale-150 text-pink-500  transition'/>}
+              <p>{inCart ? "Remove from cart " : "Add to cart" }</p>
+
             </div>
 
           </div>

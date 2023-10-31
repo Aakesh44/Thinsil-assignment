@@ -2,13 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {FaLongArrowAltLeft} from 'react-icons/fa'
 import {BiSolidTrash} from 'react-icons/bi'
-import data from '../data/data.json'
 import { useContext } from 'react'
 import DataContext from '../context/dataContext'
 
 const Cart = () => {
 
-  const {cartProducts,handleCart} = useContext(DataContext)
+  const {cartProducts,handleRemoveFromCart} = useContext(DataContext)
+
   const totalPrice = cartProducts.reduce((acc,a)=>{return acc + a.price},0)
 
   return (
@@ -34,11 +34,11 @@ const Cart = () => {
         {cartProducts?.map((product,ind)=>(
           <div className='w-full h-28 my-4 border rounded-sm flex items-center justify-around px-2 md:px-7 sm:py-2 bg-cyan-2000 ' key={ind}>
 
-            <Link to={`/products/${product.id || ""}`} className='h-5/6 sm:h-full aspect-square mr-3 border bg-cover bg-center bg-no-repeat' style={{backgroundImage:`url(${product.img || ""})`}}></Link>
+            <Link to={`/products/${product._id || ""}`} className='h-5/6 sm:h-full aspect-square mr-3 border bg-cover bg-center bg-no-repeat' style={{backgroundImage:`url(${product.img || ""})`}}></Link>
 
             <section className='flex flex-wrap  h-full sm:flex-row w-full items-center justify-around'>
 
-              <Link to={`/products/${product.id || ""}`}  className='h-1/2 w-full bg-cyan-2000 sm:h-full sm:w-1/2 flex flex-col items-centser justify-center gap-1 md:gap-3 bg-green-3000 '>
+              <Link to={`/products/${product._id || ""}`}  className='h-1/2 w-full bg-cyan-2000 sm:h-full sm:w-1/2 flex flex-col items-centser justify-center gap-1 md:gap-3 bg-green-3000 '>
                 <h1  className='text-sm font-semibold whitespace-nowrap truncate'>{product.title || ""}</h1>
                 <p className='text-sm sm:text-lg font-bold'>₹{product.price || 0}</p>
               </Link>
@@ -55,7 +55,7 @@ const Cart = () => {
 
             </section>
 
-            <span onClick={()=>handleCart(product)} className=' bg-pink-100 p-2 md:p-2 h-fit ml-auto my-auto rounded active:scale-95 transition'>
+            <span onClick={()=>handleRemoveFromCart(product?._id)} className=' bg-pink-100 p-2 md:p-2 h-fit ml-auto my-auto rounded active:scale-95 transition cursor-pointer'>
               <BiSolidTrash className='h-5 w-5 cursor-pointer text-pink-600'/>
             </span>
           </div>
@@ -109,7 +109,7 @@ const Cart = () => {
                 <p>₹{totalPrice || 0}</p>
               </div>
 
-              <Link to="/checkout" className=' bg-pink-700 text-gray-50 h-12 w-5/6 mx-auto my-5 rounded-md text-xs font-bold active:scale-95 transition flex items-center justify-center'>PROCEED TO CHECKOUT</Link>
+              <Link to={ cartProducts?.length ? "/checkout" : "/"} className=' bg-pink-700 text-gray-50 h-12 w-5/6 mx-auto my-5 rounded-md text-xs font-bold active:scale-95 transition flex items-center justify-center'>PROCEED TO CHECKOUT</Link>
 
 
             </section>
