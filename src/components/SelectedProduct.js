@@ -1,7 +1,7 @@
-import React, { useState ,useEffect,useContext} from 'react'
+import React, { useState ,useContext} from 'react'
 import NewItems from './NewItems'
 import {BiSolidShareAlt,BiSolidHeart,BiSolidCartAlt,BiCartAlt,BiHeart,BiPlus,BiMinus,BiLogoFacebook,BiLogoTwitter,BiLogoInstagram,BiLogoWhatsapp,BiLogoPinterestAlt} from 'react-icons/bi'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import DataContext from '../context/dataContext'
 const SelectedProduct = () => {
 
@@ -22,7 +22,14 @@ const SelectedProduct = () => {
   const [liked,setLiked] = useState(mainUser?.likedProducts?.includes(Item?._id))
   const [inCart,setInCart] = useState(mainUser?.cartProducts?.includes(Item?._id))
 
+  const navigate = useNavigate()
+
   function handleLike() {
+
+    if( !mainUser){
+      navigate('/signup')
+      return
+    }
     if(liked){
       handleDislikeProduct(Item?._id)
     }
@@ -33,6 +40,12 @@ const SelectedProduct = () => {
   }
 
   function handleCart() {
+
+    if( !mainUser){
+      navigate('/signup')
+      return
+    }
+
     if(inCart){
       handleRemoveFromCart(Item?._id)
     }
@@ -120,7 +133,7 @@ const SelectedProduct = () => {
 
           </div>
 
-          <Link to="/checkout" className=' w-3/5 md:w-fit md:px-6 py-2 my-5 mx-auto md:mx-0 flex items-center justify-center font-semibold text-lg bg-pink-600 text-white rounded-md active:scale-95'>Buy Now</Link>
+          <Link to={mainUser ? "/checkout" : "/signup"} className=' w-3/5 md:w-fit md:px-6 py-2 my-5 mx-auto md:mx-0 flex items-center justify-center font-semibold text-lg bg-pink-600 text-white rounded-md active:scale-95'>Buy Now</Link>
 
         </aside>
       </section>
