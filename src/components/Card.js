@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import {BiSolidHeart,BiSolidCartAlt,BiSolidRightTopArrowCircle,BiLoaderCircle,BiCartAlt,BiHeart} from 'react-icons/bi'
+import React, {  useState } from 'react'
+import {BiSolidHeart,BiSolidCartAlt,BiSolidRightTopArrowCircle,BiCartAlt,BiHeart} from 'react-icons/bi'
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import DataContext from '../context/dataContext'

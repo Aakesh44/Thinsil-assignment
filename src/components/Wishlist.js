@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react'
+import React,{useContext} from 'react'
 import {BiSolidTrash,BiCartAlt,BiSolidCartAlt} from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import DataContext from '../context/dataContext'

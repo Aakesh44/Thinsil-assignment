@@ -4,7 +4,6 @@ import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 import axios from 'axios'
 import DataContext from '../context/dataContext'
-import { Link } from 'react-router-dom'
 
 const SignUp = () => {
 
@@ -41,7 +40,7 @@ const SignUp = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:4000/sign-up",
+        "https://fake-store-server.vercel.app/sign-up",
         {
           username:name,
           email:email,
@@ -53,7 +52,12 @@ const SignUp = () => {
       console.log(response);
       localStorage.setItem('store-user',JSON.stringify(response.data._id))
       handleUser()
+      
       setLoading(false)
+
+      setName("")
+      setEmail("")
+      setPassword("")
     } catch (error) {
       setLoading(false)
       if (error.response) {

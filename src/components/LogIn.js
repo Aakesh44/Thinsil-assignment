@@ -32,7 +32,7 @@ const LogIn = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:4000/log-in",
+        "https://fake-store-server.vercel.app/log-in",
         {
           email:email,
           password:password,
@@ -43,6 +43,8 @@ const LogIn = () => {
       // console.log(response);
       setError(null)
       localStorage.setItem('store-user',JSON.stringify(response.data._id))
+      setEmail("")
+      setPassword("")
       handleUser()
 
     } catch (error) {
