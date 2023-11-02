@@ -46,6 +46,7 @@ const LogIn = () => {
       setEmail("")
       setPassword("")
       handleUser()
+      window.history.back()
 
     } catch (error) {
       if (error.response) {

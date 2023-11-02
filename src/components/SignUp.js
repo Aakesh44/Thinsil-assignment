@@ -52,7 +52,7 @@ const SignUp = () => {
       console.log(response);
       localStorage.setItem('store-user',JSON.stringify(response.data._id))
       handleUser()
-      
+      window.history.back()
       setLoading(false)
 
       setName("")

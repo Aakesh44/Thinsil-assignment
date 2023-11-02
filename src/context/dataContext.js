@@ -39,7 +39,6 @@ function handleUser() {
         const userid = JSON.parse(res)
         setUserId(userid)
         // console.log(userid);
-        window.history.back()
     }
 }
 
