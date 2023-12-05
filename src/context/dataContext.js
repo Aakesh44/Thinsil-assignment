@@ -27,7 +27,7 @@ async function getProducts() {
         const data = await response.data
         // console.log('All products fetched');
         setProducts(data)
-
+        setSearchProducts(data)
     } catch (error) {
         console.log(error);
     }
@@ -252,6 +252,7 @@ async function handlePlacingOrder() {
     }
 }
 
+
 function handleSearchProducts(e,searchQuery) {
 
     e.preventDefault()
@@ -260,7 +261,6 @@ function handleSearchProducts(e,searchQuery) {
         const title = product.title.split(" ").join("").toLowerCase()
         const query =searchQuery.split(" ").join("").toLowerCase()
 
-        
         if(title.includes(query)){
             // console.log(title,query);
             return true

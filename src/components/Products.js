@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import {BiPlus,BiMinus} from 'react-icons/bi'
 import {FaFilter} from 'react-icons/fa'
+import { MdOutlineNavigateNext,MdOutlineNavigateBefore} from "react-icons/md";
 import Card from './Card'
 import DataContext from '../context/dataContext'
 const Products = () => {
@@ -18,10 +19,25 @@ const Products = () => {
   const [priceOpen,setpriceOpen] = useState(false)
   const [sizeOpen,setsizeOpen] = useState(false)
   
-  
 
+  const [curPage,setCurPage] = useState(1)
+  console.log( );
+
+  const productSec = useRef()
+
+  const handlePage= (number)=>{
+
+    if(number < 1 || number >Math.ceil(searchProducts.length/9)){
+      return
+    }
+    setCurPage(number)
+    if(productSec.current){
+      productSec.current.scrollTo(0,0)
+      window.scrollTo(0,0)
+    }
+  }
   return (
-    <main className='w-full lg:px-20 xl:px-32 mb-32 lg:flex justify-center bg-pink-1000'>
+    <main style={{maxHeight:'90vh'}} className='w-full lg:px-20 xl:px-32 mb-32 lg:flex justify-center bg-pink-1000'>
       
     {/* products: filter section */}
 
@@ -79,12 +95,25 @@ const Products = () => {
 
     {/* products: render the products    */}
     
-      <section className=' w-full lg:w-3/4 p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000'>
+      <section ref={productSec} className=' w-full lg:w-3/4 p-10 flex flex-wrap justify-center md:justify-start bg-cyan-2000 overflow-y-scroll serachProductsScroll' style={{maxHeight:'90vh'}}>
           
-          {searchProducts.map((product,i)=>(
+          {searchProducts?.slice(curPage*9 - 9, curPage*9)?.map((product,i)=>(
             <Card productId={product._id} size={true} key={i}/>
           ))}
           
+          <div className=' w-full flex items-center justify-center gap-3 select-none pageNumbers'>
+
+            <span className={ curPage <= 1 && `pageNumHidden`} onClick={()=>handlePage(curPage-1)}><MdOutlineNavigateBefore/></span>
+
+            {
+              [...Array(Math.ceil(searchProducts.length/9))].map((_,i)=>{
+               return <span style={{backgroundColor: curPage === i+1 && "rgb(237, 81, 133)",color: curPage === i+1 && "white" }} onClick={()=>handlePage(i+1)}>{i+1}</span>
+              })
+            }
+
+            <span className={ curPage >= Math.ceil(searchProducts.length/9) && `pageNumHidden`} onClick={()=>handlePage(curPage+1)}><MdOutlineNavigateNext/></span>
+
+          </div>
           
           {!searchProducts.length && 
           <div className='mx-auto my-auto font-semibold h-64 lg:h-96 aspect-square bg-center bg-cover bg-no-repeat bg-blend-screen' style={{ backgroundImage: `url("https://img.freepik.com/premium-vector/computer-forensics-abstract-concept-vector-illustration_107173-28350.jpg?size=626&ext=jpg&uid=R107810290&ga=GA1.1.395143972.1697631505&semt=ais")` }}>

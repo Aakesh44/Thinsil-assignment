@@ -37,7 +37,9 @@
   background-color: rgb(230, 97, 168);
 }
 
-
+.serachProductsScroll::-webkit-scrollbar{
+  width: 0px;
+}
 
 .App{
   @media screen and (max-width:400px){
@@ -87,3 +89,18 @@ input[type=checkbox] {
 
 }
 
+.pageNumbers > span{
+  height: 40px;width:40px;
+  color:rgb(237, 81, 133);
+  border-width: 2px;
+  border-color:rgb(237, 81, 133);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pageNumHidden{
+  opacity: 0;
+}
